@@ -1,6 +1,16 @@
-function Input() {
+import { InputProps } from "./Input.types"
+
+function Input({ name, label, type, placeholder, className }: InputProps) {
     return (
-        <input type="text"/>
+        <div>
+            <label htmlFor={name}>{label}</label>
+            <input 
+            name={name}
+            type={type}
+            placeholder={placeholder}
+            className={className}
+            />
+        </div>
     )
 }
 

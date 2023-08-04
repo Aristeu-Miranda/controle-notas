@@ -1,6 +1,8 @@
-function Imagem() {
+import { ImagemProps } from "./Imagem.types"
+
+function Imagem({ src, alt }: ImagemProps) {
     return (
-        <img />
+        <img src={src} alt={alt}/>
     )
 }
 
