@@ -1,6 +1,18 @@
+import { Outlet, Link } from "react-router-dom"
+import Header from "../../Components/Header/Header"
+import Footer from "../../Components/Footer/Footer"
+import Container from "../../Components/Container/Container"
+
 function Home() {
     return (
-        <h1>Hello World! Home Page</h1>
+        <main>
+            <Header />
+                <Link to={"new"}>Aqui</Link>
+                <Container>
+                    <Outlet />
+                </Container>
+            <Footer />
+        </main>
     )
 }
 

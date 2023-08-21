@@ -1,4 +1,6 @@
 import { BotaoProps } from "./Botao.types"
+
+
 function Botao({ className, type, children }: BotaoProps) {
     return (
         <button className={className} type={type}>
@@ -6,4 +8,6 @@ function Botao({ className, type, children }: BotaoProps) {
         </button>
     )
 }
+
+
 export default Botao
