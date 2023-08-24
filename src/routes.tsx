@@ -1,7 +1,10 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Inicio from './Pages/Inicio';
-import Home from './Pages/Home';
+import PageBase from './Pages/PageBase';
 import NewNota from './Pages/NewNota';
+import Contato from './Pages/Contato';
+import Home from './Pages/Home';
+
 
 
 
@@ -10,8 +13,10 @@ function App() {
     <BrowserRouter>
         <Routes>
             <Route path='/' element={<Inicio />} />
-            <Route path='home' element={<Home />}>
+            <Route path='cn' element={<PageBase />}>
+              <Route path='home' element={<Home />} />
               <Route path='new' element={<NewNota />} />
+              <Route path='contato' element={<Contato />} />
             </Route>
         </Routes>
     </BrowserRouter>

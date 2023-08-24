@@ -5,7 +5,7 @@ import Logo from "../../Assets/logotipo.png"
 function Inicio() {
     const navigate = useNavigate();
     const handlePageEntrar = () => {
-        navigate('/home');
+        navigate('/cn/home');
     }
 
     return (
