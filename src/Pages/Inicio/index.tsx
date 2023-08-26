@@ -1,10 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import Input from "../../Components/Input/Input";
 import Logo from "../../Assets/logotipo.png"
+import Botao from "../../Components/Botao";
 
 function Inicio() {
     const navigate = useNavigate();
-    const handlePageEntrar = () => {
+    const PageEntrar = () => {
         navigate('/cn/home');
     }
 
@@ -19,13 +20,13 @@ function Inicio() {
                 name={"user-name"} 
                 placeholder={"Digite seu nome"}
                 />
-                <button
-                type="button"
-                className="bg-slate-800 p-2 mt-4 rounded-md text-slate-100 hover:font-bold hover:bg-slate-600"
-                onClick={handlePageEntrar}
+                <Botao 
+                    className={"bg-slate-800 p-2 mt-4 rounded-md text-slate-100 hover:font-bold hover:bg-slate-600"}
+                    type="button"
+                    onClick={PageEntrar}
                 >
                     Entrar
-                </button>
+                </Botao>
             </div>
         </div>
     )

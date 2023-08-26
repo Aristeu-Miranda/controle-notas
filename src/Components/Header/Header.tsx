@@ -19,7 +19,7 @@ const Header = () => {
             <nav>
                 <ul className="flex justify-evenly text-slate-100 font-semibold">
                     <HeaderLink to={"home"} name={"Home"} />
-                    <HeaderLink to={"new"} name={"Nota fiscal"} />
+                    <HeaderLink to={"new"} name={"Controle de Notas"} />
                     <HeaderLink to={"contato"} name={"Contato"} />
                 </ul>
             </nav>

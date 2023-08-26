@@ -1,9 +1,9 @@
 import { BotaoProps } from "./Botao.types"
 
 
-function Botao({ className, type, children }: BotaoProps) {
+function Botao({ className, type, children, onClick }: BotaoProps) {
     return (
-        <button className={className} type={type}>
+        <button className={className} type={type} onClick={onClick}>
             {children}
         </button>
     )
