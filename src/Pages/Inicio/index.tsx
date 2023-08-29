@@ -1,13 +1,20 @@
 import { useNavigate } from "react-router-dom";
-import Input from "../../Components/Input/Input";
 import Logo from "../../Assets/logotipo.png"
 import Botao from "../../Components/Botao";
+import { useContext } from "react";
+import { UserContext } from "../../Contexts/User/UserContext";
+import Input from "../../Components/Input";
+
 
 function Inicio() {
     const navigate = useNavigate();
     const PageEntrar = () => {
         navigate('/cn/home');
     }
+    const { setUser } = useContext(UserContext);
+    const changeName = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setUser(e.target.value);
+    };
 
     return (
         <div className="flex items-center justify-center h-screen">
@@ -19,6 +26,7 @@ function Inicio() {
                 className="w-[336px] mt-5 py-1 rounded-md px-2" 
                 name={"user-name"} 
                 placeholder={"Digite seu nome"}
+                onChange={changeName}
                 />
                 <Botao 
                     className={"bg-slate-800 p-2 mt-4 rounded-md text-slate-100 hover:font-bold hover:bg-slate-600"}

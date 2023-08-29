@@ -37,7 +37,7 @@ function Home() {
                 </div>
             </div>
             <Botao 
-                    className={'bg-stone-500 p-2 mt-10 rounded-md text-slate-100 hover:font-bold hover:bg-stone-800 flex justify-evenly items-center w-64'} 
+                    className={'bg-stone-500 p-2 mt-10 mb-3 rounded-md text-slate-100 hover:font-bold hover:bg-stone-800 flex justify-evenly items-center w-64'} 
                     type='button' 
                     onClick={changePage}
                 >

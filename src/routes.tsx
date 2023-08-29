@@ -4,21 +4,23 @@ import PageBase from './Pages/PageBase';
 import NewNota from './Pages/NewNota';
 import Contato from './Pages/Contato';
 import Home from './Pages/Home';
-
+import UserProvider from './Contexts/User/UserContext';
 
 
 
 function App() {
   return (
     <BrowserRouter>
-        <Routes>
-            <Route path='/' element={<Inicio />} />
-            <Route path='cn' element={<PageBase />}>
-              <Route path='home' element={<Home />} />
-              <Route path='new' element={<NewNota />} />
-              <Route path='contato' element={<Contato />} />
-            </Route>
-        </Routes>
+      <UserProvider>
+          <Routes>
+              <Route path='/' element={<Inicio />} />
+              <Route path='cn' element={<PageBase />}>
+                <Route path='home' element={<Home />} />
+                <Route path='new' element={<NewNota />} />
+                <Route path='contato' element={<Contato />} />
+              </Route>
+          </Routes>
+        </UserProvider>
     </BrowserRouter>
   );
 }

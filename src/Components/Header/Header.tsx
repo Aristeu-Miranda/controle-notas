@@ -1,7 +1,11 @@
+import { useContext } from "react";
 import Logo from "../../Assets/logotipo.png"
+import { UserContext } from "../../Contexts/User/UserContext";
 import HeaderLink from "../HeaderLink/HeaderLink"
 
-const Header = () => {
+
+function Header() {
+    const { user } = useContext(UserContext);
 
     return (
         <>
@@ -13,7 +17,7 @@ const Header = () => {
                 className="h-14 w-14" 
             />
                 </li>
-                <li><p className="pt-4 font-bold text-slate-100">Olá, seja bem-vindo</p></li>
+                <li><p className="pt-4 font-bold text-slate-100">Olá, {user}!</p></li>
             </ul>
             </header>
             <nav>
