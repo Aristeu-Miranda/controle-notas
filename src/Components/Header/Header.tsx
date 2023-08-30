@@ -2,6 +2,7 @@ import { useContext } from "react";
 import Logo from "../../Assets/logotipo.png"
 import { UserContext } from "../../Contexts/User/UserContext";
 import HeaderLink from "../HeaderLink/HeaderLink"
+import Hours from "../Hours/Hours";
 
 
 function Header() {
@@ -11,13 +12,19 @@ function Header() {
         <>
             <header className="w-full h-14 box-border flex flex-col bg-zinc-900 border-b-2 border-slate-100">
             <ul className="flex justify-around">
-                <li><img 
-                src={Logo} 
-                alt="Logotipo"
-                className="h-14 w-14" 
-            />
+                <li>
+                    <Hours />
                 </li>
-                <li><p className="pt-4 font-bold text-slate-100">Olá, {user}!</p></li>
+                <li>
+                    <img 
+                        src={Logo} 
+                        alt="Logotipo"
+                        className="h-14 w-14" 
+                    />
+                </li>
+                <li>
+                    <p className="pt-4 font-bold text-slate-100">Olá, {user}!</p>
+                </li>
             </ul>
             </header>
             <nav>

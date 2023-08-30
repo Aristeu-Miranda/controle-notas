@@ -24,7 +24,7 @@ function Hours() {
     };
 
     return (
-        <div className="pt-1 font-bold flex flex-col">
+        <div className="pt-1 font-bold flex flex-col text-slate-100">
             <p>{formatDate(currentDateTime)}</p>
             <p>{formatTime(currentDateTime)}</p>
         </div>
