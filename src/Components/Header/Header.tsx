@@ -28,7 +28,7 @@ function Header() {
             </ul>
             </header>
             <nav>
-                <ul className="flex justify-evenly text-slate-100 font-semibold">
+                <ul className="flex justify-evenly text-neutral-950 font-semibold">
                     <HeaderLink to={"home"} name={"Home"} />
                     <HeaderLink to={"new"} name={"Controle de Notas"} />
                     <HeaderLink to={"contato"} name={"Contato"} />
