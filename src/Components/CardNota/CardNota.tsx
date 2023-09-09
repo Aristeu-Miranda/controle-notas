@@ -3,15 +3,15 @@ import { AiOutlineClose } from 'react-icons/ai'
 
 function CardNota({ name, contract, service, portion, status, dateMaxSend}: CardNotaProps) {
     return (
-        <ul className="flex w-[1300px] justify-evenly items-center text-xl bg-slate-100 mb-3 py-4 rounded-lg">
-            <li>{name}</li>
-            <li>{contract}</li>
-            <li>{service}</li>
-            <li>{portion}</li>
-            <li>{status}</li>
-            <li>{dateMaxSend}</li>
-            <li><AiOutlineClose /></li>
-        </ul>
+        <div className="grid grid-cols-10 text-center text-base bg-slate-100 mb-3 py-4 rounded-lg">
+            <div className="col-span-2">{name}</div>
+            <div>{contract}</div>
+            <div className="col-span-2">{service}</div>
+            <div>{portion}</div>
+            <div>{status}</div>
+            <div className="col-span-2">{dateMaxSend}</div>
+            <div><AiOutlineClose /></div>
+        </div>
     )
 }
 
