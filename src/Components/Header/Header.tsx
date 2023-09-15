@@ -10,9 +10,9 @@ function Header() {
 
     return (
         <>
-            <header className="w-full h-14 box-border flex flex-col bg-zinc-900 border-b-2 border-slate-100">
+            <header className="w-full h-14 flex flex-col bg-zinc-900 border-b-2 border-slate-100">
             <ul className="flex justify-around">
-                <li>
+                <li className="hidden sm:block">
                     <Hours />
                 </li>
                 <li>
@@ -28,7 +28,7 @@ function Header() {
             </ul>
             </header>
             <nav>
-                <ul className="flex justify-evenly text-neutral-950 font-semibold">
+                <ul className="flex justify-evenly text-neutral-950 text-xs font-bold min-[354px]:text-sm min-[396px]:text-base">
                     <HeaderLink to={"home"} name={"Home"} />
                     <HeaderLink to={"new"} name={"Controle de Notas"} />
                     <HeaderLink to={"contato"} name={"Contato"} />

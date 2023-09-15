@@ -5,17 +5,15 @@ import { AiOutlineClose } from 'react-icons/ai'
 function CardNota({ name, contract, service, portion, status, dateMaxSend}: CardNotaProps) {
     return (
         <div>
-            <div className="grid grid-cols-8 w-[1700px] text-center text-base bg-slate-100 mb-1 py-2 rounded-lg">
-                <div className="col-span-2">{name}</div>
-                <div className="col-span-2">{service}</div>
-                <div>{contract}</div>
-                <div>{portion}</div>
-                <div>{dateMaxSend}</div>
-                <div>{status}</div>
+            <div className="sm:flex sm:text-center sm:text-base bg-slate-100 mb-1 py-2 rounded-lg border border-black">
+                <div className="lg:w-64 xl:w-72 2xl:w-80 mx-4">{name}</div>
+                <div className="lg:w-64 xl:w-72 2xl:w-80 mx-4">{service}</div>
+                <div className="lg:w-24 xl:w-32 2xl:w-44 mx-1">{contract}</div>
+                <div className="lg:w-24 xl:w-32 2xl:w-44 mx-1">{portion}</div>
+                <div className="lg:w-24 xl:w-32 2xl:w-44 mx-1">{dateMaxSend}</div>
+                <div className="lg:w-24 xl:w-32 2xl:w-44 mx-1">{status}</div>
             </div>
-            <Botao className={"relative left-[1690px] -top-5 text-slate-100 p-1 bg-black rounded-lg"}>
-                <AiOutlineClose />
-            </Botao>
+            <div><Botao className={"bg-black text-white p-1 rounded-md relative -right-full lg:-right-[980px] xl:-right-[1175px] 2xl:-right-[1430px] -top-5"}><AiOutlineClose /></Botao></div>
         </div>
     )
 }

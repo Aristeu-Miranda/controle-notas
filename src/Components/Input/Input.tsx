@@ -1,9 +1,8 @@
 import { InputProps } from "./Input.types"
 
-function Input({ name, label, type, placeholder, className, onChange }: InputProps) {
+function Input({ name, type, placeholder, className, onChange }: InputProps) {
     return (
         <div>
-            <label htmlFor={name}>{label}</label>
             <input 
             name={name}
             type={type}
