@@ -1,6 +1,6 @@
 export interface InputProps 
     extends Omit<React.HTMLProps<HTMLInputElement>, "size"> {
-    name: string;
+    name?: string;
     type?: string;
     placeholder?: string;
     className: string;
