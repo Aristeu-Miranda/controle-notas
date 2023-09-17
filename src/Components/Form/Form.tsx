@@ -2,6 +2,7 @@ import Botao from "../Botao/Botao"
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import {object, string} from "yup"
+import { FormProps } from "./Form.type"
 
 const schema = object({
     client: string().required("Campo obrigatório").min(5, "Insira um nome válido").max(35, "Excesso de caracteres"),
@@ -12,7 +13,7 @@ const schema = object({
     status: string()
 })
 
-function Form() {
+function Form({ options }: FormProps) {
     const onSubmit = (data: any) => console.log(data)
 
     const {
@@ -84,8 +85,9 @@ function Form() {
                 <div className="my-4 px-11">
                     <label className="my-auto mr-5 text-center" htmlFor='status'>Status da nota fiscal</label>
                     <select {...register("status")} className="p-2 rounded-lg">
-                        <option value="pendente">Pendente</option>
-                        <option value="enviado">Enviado</option>
+                        {options.map((option: any) => (
+                            <option value={option.name} key={option.id}>{option.name}</option>
+                        ))}
                     </select>
                 </div>
                 <Botao type="submit" className="text-white p-2 mt-10 bg-green-500 rounded-lg transition hover:bg-green-700 duration-300">Cadastrar nota fiscal</Botao>

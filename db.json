@@ -18,5 +18,15 @@
             "status": true,
             "date": 20
         }
+    ],
+    "status": [
+        {
+            "id": 1,
+            "name": "Pendente"
+        },
+        {
+            "id": 2,
+            "name": "Enviado"
+        }
     ]
 }
