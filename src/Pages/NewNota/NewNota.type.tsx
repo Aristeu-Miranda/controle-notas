@@ -4,6 +4,6 @@ export interface Cliente {
     service: string;
     contract: string;
     portion: string;
-    status: boolean;
+    status: string;
     date: number;
   }

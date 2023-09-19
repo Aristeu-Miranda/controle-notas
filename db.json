@@ -1,32 +1,32 @@
 {
-    "clientes": [
-        {
-            "id": 1,
-            "name": "Cond. Ed. Théo",
-            "service": "Manutenção do Sistema de Para-Raios",
-            "contract": "4512-09/23-0",
-            "portion": "1 / 20",
-            "status": true,
-            "date": 10
-        },
-        {
-            "id": 2,
-            "name": "Cond. Ed. José",
-            "service": "Prumadas elétricas",
-            "contract": "3298-09/23-0",
-            "portion": "1/1",
-            "status": true,
-            "date": 20
-        }
-    ],
-    "status": [
-        {
-            "id": 1,
-            "name": "Pendente"
-        },
-        {
-            "id": 2,
-            "name": "Enviado"
-        }
-    ]
+  "clientes": [
+    {
+      "name": "TOtal",
+      "service": "Tomadas",
+      "contract": "2526-08/23-1",
+      "portion": "1/2",
+      "date": "13",
+      "status": "Pendente",
+      "id": 443
+    },
+    {
+      "name": "Aristeu José",
+      "service": "para raios",
+      "contract": "2526-08/23-1",
+      "portion": "1/10",
+      "date": "3",
+      "status": "Enviado",
+      "id": 530
+    }
+  ],
+  "status": [
+    {
+      "id": 1,
+      "name": "Pendente"
+    },
+    {
+      "id": 2,
+      "name": "Enviado"
+    }
+  ]
 }

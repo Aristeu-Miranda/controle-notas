@@ -4,27 +4,54 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import {object, string} from "yup"
 import { FormProps } from "./Form.type"
 
+
 const schema = object({
-    client: string().required("Campo obrigatório").min(5, "Insira um nome válido").max(35, "Excesso de caracteres"),
-    service: string().required("Campo obrigatório").min(5, "Insira um serviço válido"),
-    contract: string().required("Campo obrigatório").min(5, "N° de contrato inválido"),
-    portion: string().required("Campo obrigatório").min(3, "parcela inválida"),
+    name: string().required("Campo obrigatório").min(5, "Insira um nome válido").max(35, "Excesso de caracteres"),
+    service: string().required("Campo obrigatório").min(5, "Insira um serviço válido").max(35, "Excesso de caracteres"),
+    contract: string().required("Campo obrigatório").min(5, "N° de contrato inválido").max(13, "Excesso de caracteres"),
+    portion: string().required("Campo obrigatório").min(3, "parcela inválida").max(5, "Excesso de caracteres"),
     date: string().required("Campo obrigatório"),
     status: string()
 })
 
 function Form({ options }: FormProps) {
-    const onSubmit = (data: any) => console.log(data)
+
+    const onSubmit = async (data: any) => {
+        const randomId = Math.floor(Math.random() * 1000);
+        const clientData = { ...data, id: randomId };
+
+        try {
+            const response = await fetch('http://localhost:5000/clientes', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(clientData),
+            });
+            if (response.ok) {
+                console.log('Dados enviados com sucesso!');
+            } else {
+                console.error('Erro ao enviar os dados para a API');
+            }
+        } catch (error) {
+            console.error('Ocorreu um erro ao enviar os dados:', error);
+        }
+        reset();
+        window.location.reload()
+    };
 
     const {
         register,
         handleSubmit,
         watch,
+        reset,
         formState: { errors },
     } = useForm({
         resolver: yupResolver(schema)
     })
     
+
+
     return (
         <>
             <div className="mb-10">
@@ -33,14 +60,14 @@ function Form({ options }: FormProps) {
             </div>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="my-4 px-11">
-                    <label className="my-auto mr-20 text-start" htmlFor="client">Cliente</label>
+                    <label className="my-auto mr-20 text-start" htmlFor="name">Cliente</label>
                     <input  
                         className='p-2 rounded-lg w-80' 
                         type='text'
                         placeholder='Ex.: Cond / Empresa'
-                        {...register("client")}
+                        {...register("name")}
                     />
-                    <span className="block my-1 text-red-700">{errors?.client?.message}</span>
+                    <span className="block my-1 text-red-700">{errors?.name?.message}</span>
                 </div>
                 <div className="my-4 px-11">
                     <label className="my-auto mr-20 text-start" htmlFor="service">Serviço</label>

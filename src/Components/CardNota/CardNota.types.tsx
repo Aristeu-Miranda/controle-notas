@@ -3,6 +3,8 @@ export interface CardNotaProps {
     contract: string;
     service: string;
     portion: string;
-    status: boolean;
+    status: string;
     dateMaxSend: number | string;
+    removeNotas: (id: number) => void;
+    id: number
 }
