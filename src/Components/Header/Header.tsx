@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import Logo from "../../Assets/logotipo.png"
+import Logo from "../../assets/logotipo.png"
 import { UserContext } from "../../Contexts/User/UserContext";
 import HeaderLink from "../HeaderLink/HeaderLink"
 import Hours from "../Hours/Hours";

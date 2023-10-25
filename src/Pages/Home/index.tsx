@@ -1,6 +1,6 @@
 import ImgNota from '../../Images/nf-img.png';
 import ImgNotaDois from '../../Images/nf-img-dois.png'
-import Botao from '../../Components/Botao/Botao';
+import Botao from '../../components/Botao/Botao';
 import { useNavigate } from 'react-router-dom';
 import { BsFillArrowRightCircleFill } from 'react-icons/bs'
 

@@ -1,24 +1,5 @@
 {
-  "clientes": [
-    {
-      "name": "TOtal",
-      "service": "Tomadas",
-      "contract": "2526-08/23-1",
-      "portion": "1/2",
-      "date": "13",
-      "status": "Pendente",
-      "id": 443
-    },
-    {
-      "name": "Aristeu José",
-      "service": "para raios",
-      "contract": "2526-08/23-1",
-      "portion": "1/10",
-      "date": "3",
-      "status": "Enviado",
-      "id": 530
-    }
-  ],
+  "clientes": [],
   "status": [
     {
       "id": 1,

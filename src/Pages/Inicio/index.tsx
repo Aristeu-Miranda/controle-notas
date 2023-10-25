@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router-dom";
-import Logo from "../../Assets/logotipo.png"
-import Botao from "../../Components/Botao";
+import Logo from "../../assets/logotipo.png"
+import Botao from "../../components/Botao";
 import { useContext } from "react";
 import { UserContext } from "../../Contexts/User/UserContext";
-import Input from "../../Components/Input";
+import Input from "../../components/Input";
 
 
 function Inicio() {
