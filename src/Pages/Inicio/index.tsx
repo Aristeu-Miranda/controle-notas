@@ -3,18 +3,35 @@ import Logo from "../../assets/logotipo.png"
 import Botao from "../../components/Botao";
 import { useContext } from "react";
 import { UserContext } from "../../Contexts/User/UserContext";
-import Input from "../../components/Input";
+import { useForm } from "react-hook-form"
+import { yupResolver } from "@hookform/resolvers/yup"
+import {object, string} from "yup"
 
+const schema = object({
+    username: string().required("Campo obrigatório").min(5, "Insira um nome válido").max(35, "Excesso de caracteres"),
+    userpass: string()})
 
 function Inicio() {
     const navigate = useNavigate();
-    const PageEntrar = () => {
+    const onSubmit = () => {
         navigate('/cn/home');
+        reset();
+        console.log(schema)
     }
     const { setUser } = useContext(UserContext);
     const changeName = (e: React.ChangeEvent<HTMLInputElement>) => {
         setUser(e.target.value);
     };
+
+    const {
+        register,
+        handleSubmit,
+        watch,
+        reset,
+        formState: { errors },
+    } = useForm({
+        resolver: yupResolver(schema)
+    })
 
     return (
         <div className="flex items-center justify-center h-screen">
@@ -22,23 +39,28 @@ function Inicio() {
                 <img className="w-40 h-40 mx-auto" src={Logo} alt="Logotipo da marca"/>
                 <h1 className="font-bold text-3xl">Controle de Notas</h1>
                 <p className="font-semibold mt-4">Quem está trabalhando hoje?</p>
-                <form>
-                    <Input
+                <form onSubmit={handleSubmit(onSubmit)}>
+                    <div className="my-4 px-11">
+                        <input
                         className="w-[336px] mt-5 py-1 rounded-md px-2" 
-                        name={"user-name"} 
                         placeholder={"Digite seu nome"}
+                        {...register("username")}
                         onChange={changeName}
-                    />
-                    <Input
+                        />
+                        <span className="block my-1 text-red-700">{errors?.username?.message}</span>
+                    </div>
+                    <div className="my-4 px-11">
+                        <input
                         className="w-[336px] mt-1 py-1 rounded-md px-2" 
-                        name={"user-pass"} 
+                        {...register("userpass")}
                         placeholder={"Digite sua senha"}
                         type="password"
-                    />
+                        />
+                        <span className="block my-1 text-red-700">{errors?.userpass?.message}</span>
+                    </div>
                     <Botao 
                         className={"bg-slate-800 p-2 mt-4 rounded-md text-slate-100 hover:font-bold hover:bg-slate-600"}
-                        type="button"
-                        onClick={PageEntrar}
+                        type="submit"
                     >
                         Entrar
                     </Botao>
