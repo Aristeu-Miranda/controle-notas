@@ -1,5 +1,5 @@
-import Botao from "../Botao/Botao"
-import { CardNotaProps } from "./CardNota.types"
+import Botao from "../Botao/Botao";
+import { CardNotaProps } from "./CardNota.types";
 import { AiOutlineClose } from 'react-icons/ai'
 
 function CardNota({ name, contract, service, portion, status, dateMaxSend, id, removeNotas}: CardNotaProps) {

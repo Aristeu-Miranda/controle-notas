@@ -1,7 +1,7 @@
 import { Outlet} from "react-router-dom"
-import Header from "../../components/Header/Header"
-import Footer from "../../components/Footer/Footer"
-import Container from "../../components/Container/Container"
+import Header from "../../Components/Header/Header"
+import Footer from "../../Components/Footer/Footer"
+import Container from "../../Components/Container/Container"
 
 
 function PageBase() {

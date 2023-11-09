@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import Logo from "../../assets/logotipo.png"
-import Botao from "../../components/Botao";
+import Logo from '../../Assets/logotipo.png'
+import Botao from "../../Components/Botao/Botao";
 import { useContext } from "react";
 import { UserContext } from "../../Contexts/User/UserContext";
 import { useForm } from "react-hook-form"

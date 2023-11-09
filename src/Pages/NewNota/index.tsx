@@ -1,10 +1,10 @@
-import CardNota from "../../components/CardNota/CardNota"
+import CardNota from "../../Components/CardNota/CardNota";
 import { Cliente } from "./NewNota.type"
-import Botao from "../../components/Botao/Botao";
+import Botao from "../../Components/Botao/Botao";
 import { AiOutlineFileAdd } from 'react-icons/ai'
 import { useEffect, useState } from "react";
-import ModalCadastrar from "../../components/Modal/Modal";
-import Form from "../../components/Form/Form";
+import ModalCadastrar from "../../Components/Modal/Modal";
+import Form from "../../Components/Form/Form";
 import { fetchClients, fetchStatus } from "../../Service/fetchUtils";
 
 function NewNota() {

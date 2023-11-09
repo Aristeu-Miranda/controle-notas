@@ -4,19 +4,39 @@ import { BsFillArrowRightCircleFill } from 'react-icons/bs'
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import {object, string} from "yup"
-import Botao from '../../components/Botao/Botao'
+import Botao from '../../Components/Botao/Botao'
+import { useState } from 'react'
+import emailjs from '@emailjs/browser'  
 
 function Contato() {
-
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [subject, setSubject] = useState('');
+    const [description, setDescription] = useState('');
+    
     const schema = object({
-        name: string().required("Campo obrigatório").min(5, "Insira um nome válido").max(35, "Excesso de caracteres"),
-        email: string().required("Campo obrigatório").min(10, "Insira um e-mail válido").max(35, "Excesso de caracteres"),
-        subject: string(),
-        description: string().required("Campo obrigatório"),
+        nameForm: string().required("Campo obrigatório").min(2, "Insira um nome válido").max(35, "Excesso de caracteres"),
+        emailForm: string().required("Campo obrigatório").min(10, "Insira um e-mail válido").max(35, "Excesso de caracteres"),
+        subjectForm: string(),
+        descriptionForm: string().required("Campo obrigatório"),
     })
+       
+    const onSubmit = () =>  {
 
-    const onSubmit = () => {
-        console.log(schema)
+        const templateParams = {
+            from_name: name,
+            message: description,
+            email: email,
+            subject: subject
+        }
+
+
+        emailjs.send("service_jjz1dnd", "template_b54mhii", templateParams, "Ydu06VXHriYnuMwzy")
+        .then((resp) => {
+            <div className='absolute m-auto'>
+                <p className='text-red-700'>ENVIADO MAJOR</p>
+            </div>
+        })
         reset()
     }
 
@@ -49,29 +69,32 @@ function Contato() {
                         <input
                             className='w-full mt-1 py-2 rounded-md px-2 border border-black'
                             type="text"
-                            {...register("name")} 
+                            {...register("nameForm")}
+                            onChange={(e) => setName(e.target.value)}
                         />
-                        <span className="block my-1 text-red-700">{errors?.name?.message}</span>
+                        <span className="block my-1 text-red-700">{errors?.nameForm?.message}</span>
                     </div>
                     <div className='mb-7'>
                         <label className='block text-left' htmlFor="email">E-mail</label>
                         <input
                             className='w-full mt-1 py-2 rounded-md px-2 border border-black' 
                             type="text"
-                            {...register("email")} 
+                            {...register("emailForm")}
+                            onChange={(e) => setEmail(e.target.value)}
                         />
-                        <span className="block my-1 text-red-700">{errors?.email?.message}</span>
+                        <span className="block my-1 text-red-700">{errors?.emailForm?.message}</span>
                     </div>
                     <div className='mb-5'>
                         <label className='text-left mr-5' htmlFor="subject">Assunto</label>
-                        <select className='p-2 rounded-md' {...register("subject")}>
-                            <option value="sugestao">Dúvida</option>
-                            <option value="duvida">Sugestão</option>
+                        <select className='p-2 rounded-md' {...register("subjectForm")} onChange={(e) => setSubject(e.target.value)}>
+                            <option  value="duvida">Dúvida</option>
+                            <option  value="sugestao">Sugestão</option>
                         </select>
                     </div>
                     <div>
                         <label className='block text-left mb-2' htmlFor="description">Mensagem</label>
-                        <textarea {...register("description")} className='w-full h-44 rounded-md border border-black' minLength={5} maxLength={300}></textarea>
+                        <textarea {...register("descriptionForm")} className='w-full h-44 rounded-md border border-black' minLength={5} maxLength={300} onChange={(e) => setDescription(e.target.value)}></textarea>
+                        <span className="block my-1 text-red-700">{errors?.descriptionForm?.message}</span>
                     </div>
                     <Botao type='submit' className='bg-red-700 p-2 mt-3 mx-auto rounded-md text-slate-100 transition hover:font-bold hover:bg-red-600 flex justify-evenly items-center w-32'>
                         Enviar
