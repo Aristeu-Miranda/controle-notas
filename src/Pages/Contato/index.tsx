@@ -6,9 +6,13 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import {object, string} from "yup"
 import Botao from '../../Components/Botao/Botao'
 import { useState } from 'react'
-import emailjs from '@emailjs/browser'  
+import emailjs from '@emailjs/browser'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';  
 
 function Contato() {
+    
+
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [subject, setSubject] = useState('');
@@ -21,8 +25,7 @@ function Contato() {
         descriptionForm: string().required("Campo obrigatório"),
     })
        
-    const onSubmit = () =>  {
-
+    async function onSubmit()  {
         const templateParams = {
             from_name: name,
             message: description,
@@ -30,14 +33,24 @@ function Contato() {
             subject: subject
         }
 
-
-        emailjs.send("service_jjz1dnd", "template_b54mhii", templateParams, "Ydu06VXHriYnuMwzy")
-        .then((resp) => {
-            <div className='absolute m-auto'>
-                <p className='text-red-700'>ENVIADO MAJOR</p>
-            </div>
-        })
-        reset()
+        try{
+            emailjs.send("service_jjz1dnd", "template_b54mhii", templateParams, "Ydu06VXHriYnuMwzy")
+            toast.success("E-mail enviado com sucesso!", {
+                icon: "😎",
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+            })   
+            reset()
+        } catch (error) {
+            throw new Error(`Fetch error: Network failed`)
+        }
+        
     }
 
     const {
@@ -49,6 +62,7 @@ function Contato() {
     } = useForm({
         resolver: yupResolver(schema)
     })
+
 
     return (
         <div className='mx-auto flex justify-center w-3/4 mt-5 h-full'>
@@ -87,6 +101,7 @@ function Contato() {
                     <div className='mb-5'>
                         <label className='text-left mr-5' htmlFor="subject">Assunto</label>
                         <select className='p-2 rounded-md' {...register("subjectForm")} onChange={(e) => setSubject(e.target.value)}>
+                            <option  value="">Selecione</option>
                             <option  value="duvida">Dúvida</option>
                             <option  value="sugestao">Sugestão</option>
                         </select>
@@ -96,10 +111,14 @@ function Contato() {
                         <textarea {...register("descriptionForm")} className='w-full h-44 rounded-md border border-black' minLength={5} maxLength={300} onChange={(e) => setDescription(e.target.value)}></textarea>
                         <span className="block my-1 text-red-700">{errors?.descriptionForm?.message}</span>
                     </div>
-                    <Botao type='submit' className='bg-red-700 p-2 mt-3 mx-auto rounded-md text-slate-100 transition hover:font-bold hover:bg-red-600 flex justify-evenly items-center w-32'>
-                        Enviar
-                        <BsFillArrowRightCircleFill />
-                    </Botao>
+                    <div>
+                        <ToastContainer/>
+                        <Botao type='submit' className='bg-red-700 p-2 mt-3 mx-auto rounded-md text-slate-100 transition hover:font-bold hover:bg-red-600 flex justify-evenly items-center w-32'>
+                            Enviar
+                            <BsFillArrowRightCircleFill />
+                        </Botao>
+                    </div>
+                    
                 </form>
             </div>
         </div>
