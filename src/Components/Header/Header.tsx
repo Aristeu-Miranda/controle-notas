@@ -3,10 +3,17 @@ import Logo from '../../Assets/logotipo.png'
 import { UserContext } from "../../Contexts/User/UserContext";
 import HeaderLink from "../HeaderLink/HeaderLink"
 import Hours from "../Hours/Hours";
+import { FiLogOut } from 'react-icons/fi'
+import Botao from "../Botao";
+import { useNavigate } from "react-router-dom";
 
 
 function Header() {
     const { user } = useContext(UserContext);
+    const navigate = useNavigate()
+    const changePage = () => {
+        navigate('/')
+    }
 
     return (
         <>
@@ -22,16 +29,20 @@ function Header() {
                         className="h-14 w-14" 
                     />
                 </li>
-                <li>
-                    <p className="pt-4 font-bold text-slate-100">Olá, {user}!</p>
+                <li className="flex">
+                    <p className="pt-4 font-bold text-slate-100 mr-10">Olá, {user}!</p>
+                    <Botao className="text-white"
+                        onClick={changePage}
+                    >
+                        <FiLogOut />
+                    </Botao>
                 </li>
             </ul>
             </header>
             <nav>
                 <ul className="flex justify-evenly text-neutral-950 text-xs font-bold min-[354px]:text-sm min-[396px]:text-base">
-                    <HeaderLink to={"home"} name={"Home"} />
                     <HeaderLink to={"new"} name={"Controle de Notas"} />
-                    <HeaderLink to={"contato"} name={"Contato"} />
+                    <HeaderLink to={"suporte"} name={"Suporte"} />
                 </ul>
             </nav>
         </>

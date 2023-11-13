@@ -10,3 +10,7 @@ body {
   @apply font-poppins;
 }
 
+img {
+  width: 100%
+}
+
