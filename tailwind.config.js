@@ -5,9 +5,6 @@ module.exports = {
     extend: {
       fontFamily: {
         poppins: ['Poppins']
-      },
-      backgroundImage: {
-        'header-img': "url('/Images/capa-inicio.jpg')"
       }
     },
   },

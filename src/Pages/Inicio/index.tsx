@@ -3,6 +3,8 @@ import { BsFillArrowRightCircleFill } from 'react-icons/bs'
 import ImgNota from '../../Images/nf-img.png';
 import ImgNotaDois from '../../Images/nf-img-dois.png'
 import Botao from '../../Components/Botao/Botao';
+import Teste from '../../Images/capa-inicio.png';
+
 
 function Inicio() {
 
@@ -12,14 +14,12 @@ function Inicio() {
     }
     
     return (
-        <div>
-        <header>
-            <h1 className='text-xl sm:text-3xl pb-10 text-neutral-950 font-bold'>CN - </h1>
-            <p>Rápido, </p>
-            <p>simples e </p>
-            <p>fácil</p>
-        </header>
-        <div className='max-w-5xl'>
+        <div className="flex items-center flex-col">
+            <header className="flex justify-center items-center w-full text-white py-20 bg-gradient-to-b from-slate-600 to-slate-300">
+                <h1 className="text-7xl font-semibold mr-5">CN</h1>
+                <p className="text-5xl font-semibold">Rápido, simples e fácil</p>
+            </header>
+            <div className='max-w-5xl'>
             <div className='sm:flex mb-10 sm:text-right text-center items-center text-neutral-950'>
                 <p className='sm:w-3/4 sm:mr-10 text-xs sm:text-base mb-5 text-neutral-950'>
                 Simplificando o controle de envio de notas fiscais. 
