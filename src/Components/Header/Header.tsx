@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import Logo from '../../Assets/logotipo.png'
 import { UserContext } from "../../Contexts/User/UserContext";
 import HeaderLink from "../HeaderLink/HeaderLink"
@@ -9,9 +9,18 @@ import { useNavigate } from "react-router-dom";
 
 
 function Header() {
-    const { user } = useContext(UserContext);
+    const { user, setUser } = useContext(UserContext);
+
+    useEffect(() => {
+        const valueStorage = localStorage.getItem('userName');
+        if (valueStorage) {
+            setUser(valueStorage);
+        }
+    }, []);
+
     const navigate = useNavigate()
     const changePage = () => {
+        localStorage.clear()
         navigate('/')
     }
 

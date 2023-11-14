@@ -1,58 +1,102 @@
 import { useNavigate } from "react-router-dom";
-import { BsFillArrowRightCircleFill } from 'react-icons/bs'
-import ImgNota from '../../Images/nf-img.png';
-import ImgNotaDois from '../../Images/nf-img-dois.png'
-import Botao from '../../Components/Botao/Botao';
-import Teste from '../../Images/capa-inicio.png';
+import Botao from "../../Components/Botao/Botao";
+import { useContext, useEffect } from "react";
+import { UserContext } from "../../Contexts/User/UserContext";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { object, string } from "yup";
+import ImgBg from "../../Images/capa-inicio.png";
 
+
+const schema = object({
+  username: string()
+    .required("Campo obrigatório")
+    .min(3, "Insira um nome válido")
+    .max(35, "Excesso de caracteres"),
+});
 
 function Inicio() {
+  const navigate = useNavigate();
+  const onSubmit = () => {
+    navigate("/cn/new");
+    reset();
+  };
+  const { user, setUser } = useContext(UserContext);
+  const changeName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUser(e.target.value);
+  };
 
-    const navigate = useNavigate()
-    const changePage = () => {
-        navigate('/login')
+  useEffect(() => {
+    const valueStorage = localStorage.getItem('userName');
+    if (valueStorage) {
+      setUser(valueStorage)
     }
-    
-    return (
-        <div className="flex items-center flex-col">
-            <header className="flex justify-center items-center w-full text-white py-20 bg-gradient-to-b from-slate-600 to-slate-300">
-                <h1 className="text-7xl font-semibold mr-5">CN</h1>
-                <p className="text-5xl font-semibold">Rápido, simples e fácil</p>
-            </header>
-            <div className='max-w-5xl'>
-            <div className='sm:flex mb-10 sm:text-right text-center items-center text-neutral-950'>
-                <p className='sm:w-3/4 sm:mr-10 text-xs sm:text-base mb-5 text-neutral-950'>
-                Simplificando o controle de envio de notas fiscais. 
-                Apresentamos uma solução eficiente para garantir que os prazos de envio 
-                 de notas aos clientes sejam sempre cumpridos. Nossa interface 
-                 intuitiva permite que você registre facilmente os destinatários 
-                 e monitore as datas de envio mensal, proporcionando um processo 
-                 simplificado de organização.
-                </p>
-                <img className='w-28 h-28 items-center sm:w-48 sm:h-48 mx-auto' src={ImgNota} alt="Icone de papel refererindo-se a uma nota fiscal colorido" />
-            </div>
-            <hr className='sm:hidden px-5 bg-black' />
-            <div className='sm:flex sm:text-right text-center items-center text-neutral-950 mt-10'>
-                <img className='w-28 h-28 sm:w-48 sm:h-48 sm:mr-10 items-center mx-auto' src={ImgNotaDois} alt="Icone de papel refererindo-se a uma nota fiscal colorido" />
-                <p className='sm:w-3/4 sm:mr-10 text-xs sm:text-base text-neutral-950 mt-5'>
-                Nossa plataforma é projetada para rapidez e facilidade. Em apenas alguns passos, 
-                você pode cadastrar os detalhes dos clientes e definir as datas de envio desejadas. 
-                Diga adeus à preocupação com prazos perdidos. Com nosso sistema de alertas você 
-                receberá notificações oportunas para cada envio agendado, garantindo 
-                que você nunca mais deixe escapar uma data importante.
+  }, [])
+
+  useEffect(() => {
+    localStorage.setItem('userName', user);
+  }, [user]);
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    reset,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
+
+  return (
+    <div className="mx-auto flex flex-col lg:flex-row md:justify-between xl:px-48 h-screen items-center max-w-[1920px]">
+      <img
+        className="w-screen h-screen top-0 left-0 z-[-1] absolute opacity-60"
+        src={ImgBg}
+        alt="img background"
+      />
+      <div className="max-w-3xl">
+        <header className="w-full text-center py-20">
+          <div className="text-xl md:text-7xl font-semibold mb-5">
+              CN
+          </div>
+          <p className="text-xl md:text-5xl font-semibold">Rápido, simples e fácil</p>
+        </header>
+        <div className="max-w-5xl">
+          <div className="mb-10 text-center font-semibold text-neutral-950">
+            <p>
+              Simplificando o controle e o envio de notas fiscais
             </p>
-            </div>
+          </div>
         </div>
-        <Botao 
-                className={'bg-stone-500 p-2 mt-10 mb-3 rounded-md text-slate-100 hover:font-bold hover:bg-stone-800 flex justify-evenly items-center w-32'} 
-                type='button' 
-                onClick={changePage}
+      </div>
+      <div className="flex bg-slate-300 bg-opacity-30 shadow-lg backdrop-filter backdrop-blur-sm rounded-lg border border-opacity-20 border-white">
+        <div className="max-w-2xl text-center py-10">
+          <p className="font-semibold text-lg mt-4">Quem está trabalhando hoje?</p>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="my-4 px-11">
+              <input
+                className="w-[336px] mt-5 py-1 rounded-md px-2"
+                placeholder={"Digite seu nome"}
+                {...register("username")}
+                onChange={changeName}
+              />
+              <span className="block my-1 text-red-700">
+                {errors?.username?.message}
+              </span>
+            </div>
+            <Botao
+              className={
+                "bg-slate-800 p-2 mt-4 rounded-md text-slate-100 transition hover:font-bold hover:bg-slate-600"
+              }
+              type="submit"
             >
-                Acessar 
-                <BsFillArrowRightCircleFill />
-        </Botao>
-   </div>
-    )
+              Entrar
+            </Botao>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
 }
 
-export default Inicio
+export default Inicio;
