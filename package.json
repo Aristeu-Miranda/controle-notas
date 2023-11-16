@@ -13,6 +13,7 @@
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
     "@types/react-router-dom": "^5.3.3",
+    "aos": "^3.0.0-beta.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.46.1",
@@ -53,6 +54,7 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@types/aos": "^3.0.7",
     "@types/react-modal": "^3.16.0",
     "@types/uuid": "^9.0.4",
     "@types/yup": "^0.32.0",

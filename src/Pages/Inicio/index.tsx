@@ -6,7 +6,10 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { object, string } from "yup";
 import ImgBg from "../../Images/capa-inicio.png";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
+AOS.init();
 
 const schema = object({
   username: string()
@@ -27,19 +30,20 @@ function Inicio() {
   };
 
   useEffect(() => {
-    const valueStorage = localStorage.getItem('userName');
+    const valueStorage = localStorage.getItem("userName");
     if (valueStorage) {
-      setUser(valueStorage)
+      setUser(valueStorage);
     }
-  }, [])
+  }, [setUser]);
 
   useEffect(() => {
-    localStorage.setItem('userName', user);
+    localStorage.setItem("userName", user);
   }, [user]);
 
   const {
     register,
     handleSubmit,
+    // eslint-disable-next-line
     watch,
     reset,
     formState: { errors },
@@ -48,34 +52,46 @@ function Inicio() {
   });
 
   return (
-    <div className="mx-auto flex flex-col lg:flex-row md:justify-between xl:px-48 h-screen items-center max-w-[1920px]">
+    <div className="mx-auto flex flex-col lg:flex-row md:justify-between xl:px-80 h-screen items-center max-w-[1920px]">
       <img
         className="w-screen h-screen top-0 left-0 z-[-1] absolute opacity-60"
         src={ImgBg}
         alt="img background"
       />
-      <div className="max-w-3xl">
+      <div
+        className="max-w-3xl"
+        data-aos="fade-right"
+        data-aos-offset="200"
+        data-aos-delay="150"
+        data-aos-duration="2000"
+      >
         <header className="w-full text-center py-20">
-          <div className="text-xl md:text-7xl font-semibold mb-5">
-              CN
-          </div>
-          <p className="text-xl md:text-5xl font-semibold">Rápido, simples e fácil</p>
+          <div className="text-xl md:text-7xl font-semibold mb-5">CN</div>
+          <p className="text-xl md:text-5xl font-semibold">
+            Rápido, simples e fácil
+          </p>
         </header>
         <div className="max-w-5xl">
           <div className="mb-10 text-center font-semibold text-neutral-950">
-            <p>
-              Simplificando o controle e o envio de notas fiscais
-            </p>
+            <p>Simplificando o controle e o envio de notas fiscais</p>
           </div>
         </div>
       </div>
-      <div className="flex bg-slate-300 bg-opacity-30 shadow-lg backdrop-filter backdrop-blur-sm rounded-lg border border-opacity-20 border-white">
+      <div
+        className="flex bg-slate-300 bg-opacity-30 shadow-lg backdrop-filter backdrop-blur-sm rounded-lg border border-opacity-20 border-white"
+        data-aos="fade-left"
+        data-aos-offset="200"
+        data-aos-delay="300"
+        data-aos-duration="2000"
+      >
         <div className="max-w-2xl text-center py-10">
-          <p className="font-semibold text-lg mt-4">Quem está trabalhando hoje?</p>
+          <p className="font-semibold text-lg mt-4">
+            Quem está trabalhando hoje?
+          </p>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="my-4 px-11">
               <input
-                className="w-[336px] mt-5 py-1 rounded-md px-2"
+                className="w-full mt-5 py-1 rounded-md px-2"
                 placeholder={"Digite seu nome"}
                 {...register("username")}
                 onChange={changeName}

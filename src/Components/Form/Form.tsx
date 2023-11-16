@@ -28,11 +28,6 @@ function Form({ options }: FormProps) {
                 },
                 body: JSON.stringify(clientData),
             });
-            if (response.ok) {
-                console.log('Dados enviados com sucesso!');
-            } else {
-                console.error('Erro ao enviar os dados para a API');
-            }
         } catch (error) {
             console.error('Ocorreu um erro ao enviar os dados:', error);
         }

@@ -10,10 +10,10 @@ function ModalCadastro({ openmodal, closemodal, children }: ModalProps) {
         <Modal
         isOpen={openmodal}
         onRequestClose={closemodal}
-        className="rounded-lg bg-slate-300 py-6 w-1/2 text-center mx-auto my-9 shadow-2xl shadow-black"
+        className="rounded-lg bg-slate-300 py-6 w-1/2 text-center mx-auto my-9 shadow-2xl shadow-black relative"
         >
             {children}
-        <button className='bg-black text-white p-1 rounded-md fixed left-[1355px] top-6' onClick={closemodal}><AiOutlineClose /></button>
+            <button className='bg-black text-white p-1 rounded-md absolute -top-3 -right-3' onClick={closemodal}><AiOutlineClose /></button>
         </Modal>
     )
 }

@@ -16,12 +16,12 @@ function Header() {
         if (valueStorage) {
             setUser(valueStorage);
         }
-    }, []);
+    }, [setUser]);
 
     const navigate = useNavigate()
     const changePage = () => {
-        localStorage.clear()
         navigate('/')
+        localStorage.clear()
     }
 
     return (
