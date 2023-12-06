@@ -5,7 +5,9 @@ import { AiOutlineFileAdd } from 'react-icons/ai'
 import { useEffect, useState } from "react";
 import ModalCadastrar from "../../Components/Modal/Modal";
 import Form from "../../Components/Form/Form";
-import { fetchClients, fetchStatus } from "../../Service/fetchUtils";
+import { fetchClients } from "../../Service/fetchUtils";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function NewNota() {
     const [modalOpen, setModalOpen] = useState(false);
@@ -14,24 +16,18 @@ function NewNota() {
             setModalOpen(false)
         } else setModalOpen(true)
     }
-
-    const [status, setStatus] = useState([])
-    useEffect(() => {
-        const urlApiStatus = 'http://localhost:5000/status';
-        fetchStatus(urlApiStatus, setStatus)
-    }, [])
     
     const [dados, setDados] = useState<Cliente[]>([])
     useEffect(() => {
-        const urlApiClients = 'http://localhost:5000/clientes';
+        const urlApiClients = 'https://controle-api-mhpv.onrender.com/notes';
         fetchClients(urlApiClients)
         .then(data => {
             setDados(data)
         })
     }, [])
 
-    const removeNotas = (id: number) => {
-        fetch(`http://localhost:5000/clientes/${id}`, {
+    const removeNotas = (id: any) => {
+        fetch(`https://controle-api-mhpv.onrender.com/notes/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -39,9 +35,18 @@ function NewNota() {
         })
         .then((resp) => resp.json())
         .then(() => {
-            setDados(dados.filter((dado) => dado.id !== id))
+            setDados(dados.filter((dado) => dado._id !== id))
         })
-        
+        toast.success("Registro removido!", {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          });
     }
 
     return (
@@ -59,7 +64,7 @@ function NewNota() {
                 <div className="flex flex-col justify-center items-center">
                         {dados.map((cliente: Cliente) => (
                             <CardNota
-                                key={cliente.id}
+                                key={cliente._id}
                                 name={cliente.name}
                                 contract={cliente.contract}
                                 service={cliente.service}
@@ -67,7 +72,7 @@ function NewNota() {
                                 status={cliente.status}
                                 dateMaxSend={cliente.date}
                                 removeNotas={removeNotas} 
-                                id={cliente.id}/>))}
+                                id={cliente._id}/>))}
                 </div>
                 <Botao 
                     className="p-4 rounded-full text-white bg-green-500 text-6xl fixed bottom-24 right-36 hover:drop-shadow-2xl hover:-translate-y-3 transition hover:bg-green-700 duration-300"
@@ -76,11 +81,12 @@ function NewNota() {
                     <AiOutlineFileAdd />
                 </Botao>
                 <ModalCadastrar openmodal={modalOpen} closemodal={usingModal}>
-                    <Form options={status} />
+                    <Form />
                 </ModalCadastrar>
             </div>
             ) : (
                 <div className="w-1/2 text-center mx-auto mt-10">
+                    <ToastContainer />
                     <p className="text-2xl font-medium mb-20 mt-20">Você não possui notas cadastradas... Comece agora!!!</p>
                     <Botao 
                     className="p-4 rounded-full text-white bg-green-500 text-6xl hover:drop-shadow-2xl hover:-translate-y-3 transition hover:bg-green-700 duration-300"
@@ -89,7 +95,7 @@ function NewNota() {
                     <AiOutlineFileAdd />
                 </Botao>
                 <ModalCadastrar openmodal={modalOpen} closemodal={usingModal}>
-                    <Form options={status} />
+                    <Form />
                 </ModalCadastrar>
                 </div>
             )}

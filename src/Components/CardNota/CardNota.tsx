@@ -15,7 +15,8 @@ function CardNota({ name, contract, service, portion, status, dateMaxSend, id, r
                 <div className="lg:w-24 xl:w-32 2xl:w-44 mx-1">{dateMaxSend}</div>
                 <div className={`lg:w-24 xl:w-32 2xl:w-44 mx-1 ${statusClass}`}>{status}</div>
             </div>
-            <div><Botao 
+            <div>
+                <Botao 
                 className={"bg-black text-white p-1 rounded-md relative -right-full lg:-right-[980px] xl:-right-[1175px] 2xl:-right-[1430px] -top-5"}
                 onClick={() => removeNotas(id)}
                 ><AiOutlineClose /></Botao></div>

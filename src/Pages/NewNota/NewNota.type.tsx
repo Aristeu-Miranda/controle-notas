@@ -1,5 +1,5 @@
 export interface Cliente {
-    id: number;
+    _id: any;
     name: string;
     service: string;
     contract: string;

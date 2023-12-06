@@ -2,7 +2,6 @@ import Botao from "../Botao/Botao"
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import {object, string} from "yup"
-import { FormProps } from "./Form.type"
 
 
 const schema = object({
@@ -14,14 +13,13 @@ const schema = object({
     status: string()
 })
 
-function Form({ options }: FormProps) {
+function Form() {
 
     const onSubmit = async (data: any) => {
-        const randomId = Math.floor(Math.random() * 1000);
-        const clientData = { ...data, id: randomId };
+        const clientData = { ...data };
 
         try {
-            const response = await fetch('http://localhost:5000/clientes', {
+            const response = await fetch('https://controle-api-mhpv.onrender.com/notes', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -107,9 +105,8 @@ function Form({ options }: FormProps) {
                 <div className="my-4 px-11">
                     <label className="my-auto mr-5 text-center" htmlFor='status'>Status da nota fiscal</label>
                     <select {...register("status")} className="p-2 rounded-lg">
-                        {options.map((option: any) => (
-                            <option value={option.name} key={option.id}>{option.name}</option>
-                        ))}
+                        <option value="Pendente">Pendente</option>
+                        <option value="Enviada">Enviada</option>
                     </select>
                 </div>
                 <Botao type="submit" className="text-white p-2 mt-10 bg-green-500 rounded-lg transition hover:bg-green-700 duration-300">Cadastrar nota fiscal</Botao>
