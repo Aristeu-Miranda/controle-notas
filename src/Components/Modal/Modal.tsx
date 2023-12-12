@@ -4,7 +4,7 @@ import { AiOutlineClose } from 'react-icons/ai';
 
 Modal.setAppElement('#root');
 
-function ModalCadastro({ openmodal, closemodal, children }: ModalProps) {
+function ModalRegister({ openmodal, closemodal, children }: ModalProps) {
 
     return (
         <Modal
@@ -18,4 +18,4 @@ function ModalCadastro({ openmodal, closemodal, children }: ModalProps) {
     )
 }
 
-export default ModalCadastro
+export default ModalRegister

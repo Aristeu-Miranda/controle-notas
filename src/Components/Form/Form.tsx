@@ -6,9 +6,9 @@ import {object, string} from "yup"
 
 const schema = object({
     name: string().required("Campo obrigatório").min(5, "Insira um nome válido").max(35, "Excesso de caracteres"),
-    service: string().required("Campo obrigatório").min(5, "Insira um serviço válido").max(35, "Excesso de caracteres"),
+    service: string().required("Campo obrigatório").min(5, "Insira um serviço válido").max(55, "Excesso de caracteres"),
     contract: string().required("Campo obrigatório").min(5, "N° de contrato inválido").max(13, "Excesso de caracteres"),
-    portion: string().required("Campo obrigatório").min(3, "parcela inválida").max(5, "Excesso de caracteres"),
+    portion: string().required("Campo obrigatório").max(5, "Excesso de caracteres"),
     date: string().required("Campo obrigatório"),
     status: string()
 })
@@ -82,13 +82,13 @@ function Form() {
                     />
                     <span className="block my-1 text-red-700">{errors?.contract?.message}</span>
                 </div>
-                <div className="my-4 px-11">
-                    <label className="my-auto mr-7 text-start" htmlFor="portion">Nº da parcela</label>
+                <div className="my-4 text-start pl-[218px]">
+                    <label className="my-auto mr-7 text-start" htmlFor="portion">Quantidade de parcelas</label>
                     <input 
                         {...register("portion")} 
                         className='p-2 rounded-lg w-80' 
                         type='text'
-                        placeholder='Ex.: 1/10'
+                        placeholder='Ex.: 10'
                     />
                     <span className="block my-1 text-red-700">{errors?.portion?.message}</span>
                 </div>
@@ -98,18 +98,16 @@ function Form() {
                         {...register("date")}
                         className='p-2 rounded-lg w-80' 
                         type='text'
-                        placeholder='Ex.: 10'
+                        placeholder='Ex.: 25'
                     />
                     <span className="block my-1 text-red-700">{errors?.date?.message}</span>
                 </div>
-                <div className="my-4 px-11">
-                    <label className="my-auto mr-5 text-center" htmlFor='status'>Status da nota fiscal</label>
-                    <select {...register("status")} className="p-2 rounded-lg">
-                        <option value="Pendente">Pendente</option>
-                        <option value="Enviada">Enviada</option>
-                    </select>
+                <div className="my-4 pl-[130px] relative">
+                    <label className="my-auto mr-12 absolute top left-80" htmlFor='status'>Descrição</label>
+                    <textarea {...register("status")} className="p-4 rounded-lg w-80 h-48">
+                    </textarea>
                 </div>
-                <Botao type="submit" className="text-white p-2 mt-10 bg-green-500 rounded-lg transition hover:bg-green-700 duration-300">Cadastrar nota fiscal</Botao>
+                <Botao type="submit" className="text-white p-2 mt-50 bg-green-500 rounded-lg transition hover:bg-green-700 duration-300">Cadastrar nota fiscal</Botao>
             </form>
         </>
     )
