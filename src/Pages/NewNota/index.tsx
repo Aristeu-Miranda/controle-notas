@@ -5,11 +5,13 @@ import { AiOutlineFileAdd } from "react-icons/ai";
 import { useEffect, useState } from "react";
 import ModalCadastrar from "../../Components/Modal/Modal";
 import Form from "../../Components/Form/Form";
+import Loader from "../../Components/Loader/Loarder";
 import { fetchClients } from "../../Service/fetchUtils";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function NewNota() {
+  const [removeLoader, setRemoveLoader] = useState(false); 
   const [modalOpen, setModalOpen] = useState(false);
   function usingModal() {
     if (modalOpen) {
@@ -17,10 +19,14 @@ function NewNota() {
     } else setModalOpen(true);
   }
 
+  function endLoad() {
+    setRemoveLoader(true)
+  }
+
   const [dados, setDados] = useState<Cliente[]>([]);
   useEffect(() => {
     const urlApiClients = "https://controle-api-mhpv.onrender.com/notes";
-    fetchClients(urlApiClients).then((data) => {
+    fetchClients(urlApiClients, removeLoader, endLoad).then((data) => {
       setDados(data);
     });
   }, []);
