@@ -5,6 +5,6 @@ export interface CardNotaProps {
     portion: string;
     status: string;
     dateMaxSend: number | string;
-    removeNotas: (id: number) => void;
+    removeNotas: any;
     id: number
 }

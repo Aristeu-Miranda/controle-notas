@@ -11,23 +11,21 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function NewNota() {
-  const [removeLoader, setRemoveLoader] = useState(false); 
   const [modalOpen, setModalOpen] = useState(false);
+  const [dados, setDados] = useState<Cliente[]>([]);
+  const [loading, setLoading] = useState(true);
+
   function usingModal() {
     if (modalOpen) {
       setModalOpen(false);
     } else setModalOpen(true);
   }
 
-  function endLoad() {
-    setRemoveLoader(true)
-  }
-
-  const [dados, setDados] = useState<Cliente[]>([]);
   useEffect(() => {
     const urlApiClients = "https://controle-api-mhpv.onrender.com/notes";
-    fetchClients(urlApiClients, removeLoader, endLoad).then((data) => {
+    fetchClients(urlApiClients).then((data) => {
       setDados(data);
+      setLoading(false);
     });
   }, []);
 
@@ -56,12 +54,34 @@ function NewNota() {
 
   return (
     <>
-      {dados.length > 0 ? (
+      {loading ? (
+        <Loader />
+      ) : dados.length === 0 ? (
+        <div className="w-1/2 text-center mx-auto mt-10">
+          <p className="text-2xl font-medium mb-20 mt-20">
+            Você não possui registros de notas cadastradas... Comece agora!!!
+          </p>
+          <Botao
+            className="p-4 rounded-full text-white bg-green-500 text-6xl hover:drop-shadow-2xl hover:-translate-y-3 transition hover:bg-green-700 duration-300"
+            onClick={usingModal}
+          >
+            <AiOutlineFileAdd />
+          </Botao>
+          <ModalCadastrar
+            openmodal={modalOpen}
+            closemodal={usingModal}
+            closeBtn={true}
+          >
+            <Form />
+          </ModalCadastrar>
+        </div>
+      ) : (
         <div className="sm:flex sm:flex-col sm:justify-center sm:items-center sm:mt-4">
+          <ToastContainer />
           <div className="w-2/6 text-center sm:text-2xl bg-zinc-900 text-slate-100 mb-10 py-1 rounded-lg">
             <h2>Consulte aqui suas notas a serem enviadas</h2>
           </div>
-          <div className="flex flex-col justify-center items-center">
+          <div className="flex flex-wrap gap-5 justify-center items-center">
             {dados.map((cliente: Cliente) => (
               <CardNota
                 key={cliente._id}
@@ -82,23 +102,11 @@ function NewNota() {
           >
             <AiOutlineFileAdd />
           </Botao>
-          <ModalCadastrar openmodal={modalOpen} closemodal={usingModal}>
-            <Form />
-          </ModalCadastrar>
-        </div>
-      ) : (
-        <div className="w-1/2 text-center mx-auto mt-10">
-          <ToastContainer />
-          <p className="text-2xl font-medium mb-20 mt-20">
-            Você não possui notas cadastradas... Comece agora!!!
-          </p>
-          <Botao
-            className="p-4 rounded-full text-white bg-green-500 text-6xl hover:drop-shadow-2xl hover:-translate-y-3 transition hover:bg-green-700 duration-300"
-            onClick={usingModal}
+          <ModalCadastrar
+            openmodal={modalOpen}
+            closemodal={usingModal}
+            closeBtn={true}
           >
-            <AiOutlineFileAdd />
-          </Botao>
-          <ModalCadastrar openmodal={modalOpen} closemodal={usingModal}>
             <Form />
           </ModalCadastrar>
         </div>
@@ -108,3 +116,4 @@ function NewNota() {
 }
 
 export default NewNota;
+

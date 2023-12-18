@@ -1,4 +1,4 @@
-export async function fetchClients(url: string, initload: any, endload: any) {
+export async function fetchClients(url: string) {
     try {
         const resp = await fetch(url, {
             method: 'GET',

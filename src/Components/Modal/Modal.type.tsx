@@ -4,4 +4,5 @@ export type ModalProps = {
     openmodal: boolean;
     closemodal: () => void;
     children: ReactNode;
+    closeBtn: boolean;
 }
