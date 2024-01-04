@@ -17,6 +17,13 @@ module.exports = {
           '100%': { transform: 'rotate(360deg)' },
         },
       },
+      grayscale: {
+        50: '50%',
+      },
+      backgroundImage: {
+        "img-default": "url(/src/Images/capa-inicio.png)",
+        "img-singup": "url(/src/Images/bg-sign-up.jpg)"
+      }
     },
     plugins: [],
   },

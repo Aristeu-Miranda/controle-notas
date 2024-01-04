@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import ModalCadastrar from "../../Components/Modal/Modal";
 import Form from "../../Components/Form/Form";
 import Loader from "../../Components/Loader/Loarder";
-import { fetchClients } from "../../Service/fetchUtils";
+import { fetchClients, fetchRemove } from "../../Service/fetchUtils";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -30,26 +30,22 @@ function NewNota() {
   }, []);
 
   const removeNotas = (id: any) => {
-    fetch(`https://controle-api-mhpv.onrender.com/notes/${id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((resp) => resp.json())
+    const urlApiClientsDelete = `https://controle-api-mhpv.onrender.com/notes/${id}`
+      fetchRemove(urlApiClientsDelete)
       .then(() => {
         setDados(dados.filter((dado) => dado._id !== id));
       });
-    toast.success("Registro removido!", {
-      position: "top-right",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-    });
+      toast.success("Registro removido!", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    
   };
 
   return (
@@ -58,6 +54,7 @@ function NewNota() {
         <Loader />
       ) : dados.length === 0 ? (
         <div className="w-1/2 text-center mx-auto mt-10">
+          <ToastContainer />
           <p className="text-2xl font-medium mb-20 mt-20">
             Você não possui registros de notas cadastradas... Comece agora!!!
           </p>
@@ -81,7 +78,7 @@ function NewNota() {
           <div className="w-2/6 text-center sm:text-2xl bg-zinc-900 text-slate-100 mb-10 py-1 rounded-lg">
             <h2>Consulte aqui suas notas a serem enviadas</h2>
           </div>
-          <div className="flex flex-wrap gap-5 justify-center items-center">
+          <div className="flex flex-wrap gap-5 justify-start items-center max-w-7xl">
             {dados.map((cliente: Cliente) => (
               <CardNota
                 key={cliente._id}

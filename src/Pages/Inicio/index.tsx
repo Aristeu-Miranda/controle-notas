@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Botao from "../../Components/Botao/Botao";
 import { useContext, useEffect } from "react";
 import { UserContext } from "../../Contexts/User/UserContext";
@@ -16,6 +16,7 @@ const schema = object({
     .required("Campo obrigatório")
     .min(3, "Insira um nome válido")
     .max(35, "Excesso de caracteres"),
+  userpass: string(),
 });
 
 function Inicio() {
@@ -52,20 +53,15 @@ function Inicio() {
   });
 
   return (
-    <div className="mx-auto flex flex-col lg:flex-row md:justify-between xl:px-80 h-screen items-center max-w-[1920px]">
-      <img
-        className="w-screen h-screen top-0 left-0 z-[-1] absolute opacity-60"
-        src={ImgBg}
-        alt="img background"
-      />
+    <div className="w-full h-screen flex flex-col lg:flex-row bg-img-default bg-cover bg-center bg-no-repeat justify-evenly items-center">
       <div
-        className="max-w-3xl"
+        className="max-w-3xl text-center text-sm md:text-base"
         data-aos="fade-right"
         data-aos-offset="200"
         data-aos-delay="150"
         data-aos-duration="2000"
       >
-        <header className="w-full text-center py-20">
+        <header className="w-full text-center mb-5 md:py-20">
           <div className="text-xl md:text-7xl font-semibold mb-5">CN</div>
           <p className="text-xl md:text-5xl font-semibold">
             Rápido, simples e fácil
@@ -85,19 +81,29 @@ function Inicio() {
         data-aos-duration="2000"
       >
         <div className="max-w-2xl text-center py-10">
-          <p className="font-semibold text-lg mt-4">
-            Quem está trabalhando hoje?
-          </p>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="my-4 px-11">
+            <div className="my-4 px-4 md:px-11 text-start">
+              <label htmlFor="username">Colaborador</label>
               <input
-                className="w-full mt-5 py-1 rounded-md px-2"
+                className="w-full py-1 rounded-md px-2"
                 placeholder={"Digite seu nome"}
                 {...register("username")}
                 onChange={changeName}
               />
               <span className="block my-1 text-red-700">
                 {errors?.username?.message}
+              </span>
+            </div>
+            <div className="my-4 px-4 md:px-11 text-start">
+            <label htmlFor="userpass">Senha</label>
+              <input
+                type="password"
+                className="w-full py-1 rounded-md px-2"
+                placeholder={"Digite sua senha"}
+                {...register("userpass")}
+              />
+              <span className="block my-1 text-red-700">
+                {errors?.userpass?.message}
               </span>
             </div>
             <Botao
@@ -109,6 +115,9 @@ function Inicio() {
               Entrar
             </Botao>
           </form>
+          <div className='mt-5'>
+                    <Link to='sing-up' className='text-xs text-gray-600 hover:underline opacity-80'>Registre-se</Link>
+                </div>
         </div>
       </div>
     </div>

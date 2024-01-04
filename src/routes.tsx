@@ -4,7 +4,8 @@ import PageBase from './Pages/PageBase';
 import NewNota from './Pages/NewNota';
 import Contato from './Pages/Contato';
 import UserProvider from './Contexts/User/UserContext';
-import Login from './Pages/Home';
+import Singup from './Pages/Sing-up';
+
 
 
 
@@ -14,7 +15,7 @@ function App() {
       <UserProvider>
           <Routes>
               <Route path='/' element={<Inicio />} />
-              <Route path='login' element={<Login />} />
+              <Route path='sing-up' element={<Singup />} />
               <Route path='cn' element={<PageBase />}>
                 <Route path='new' element={<NewNota />} />
                 <Route path='suporte' element={<Contato />} />
