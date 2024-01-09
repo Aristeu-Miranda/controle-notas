@@ -7,7 +7,7 @@ import Container from "../../Components/Container/Container"
 function PageBase() {
 
     return (
-        <main>
+        <main className="flex flex-col h-screen">
             <Header />
             <Container>
                     <Outlet />

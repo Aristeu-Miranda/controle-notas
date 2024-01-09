@@ -2,6 +2,7 @@ import Botao from "../Botao/Botao"
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import {object, string} from "yup"
+import { fetchCreate } from "../../Service/fetchUtils"
 
 
 const schema = object({
@@ -16,21 +17,14 @@ const schema = object({
 function Form() {
 
     const onSubmit = async (data: any) => {
-        const clientData = { ...data };
-
+        const urlApiClientsCreate = 'https://controle-api-mhpv.onrender.com/notes'
         try {
-            const response = await fetch('https://controle-api-mhpv.onrender.com/notes', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(clientData),
-            });
+            await fetchCreate(urlApiClientsCreate, data)
+            reset();
+            window.location.reload()
         } catch (error) {
             console.error('Ocorreu um erro ao enviar os dados:', error);
         }
-        reset();
-        window.location.reload()
     };
 
     const {

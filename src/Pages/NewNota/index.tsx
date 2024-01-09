@@ -29,9 +29,9 @@ function NewNota() {
     });
   }, []);
 
-  const removeNotas = (id: any) => {
+  const removeNotas = async (id: any) => {
     const urlApiClientsDelete = `https://controle-api-mhpv.onrender.com/notes/${id}`
-      fetchRemove(urlApiClientsDelete)
+      await fetchRemove(urlApiClientsDelete)
       .then(() => {
         setDados(dados.filter((dado) => dado._id !== id));
       });

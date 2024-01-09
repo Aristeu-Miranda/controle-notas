@@ -1,7 +1,7 @@
 function Footer() {
     return (
-        <div className="w-full h-14 bg-zinc-900 align-bottom text-center border-t-2 border-slate-100">
-            <p className="mt-3 text-slate-100">CN - Controle de Notas - 2023</p>
+        <div className="w-full h-14 bg-zinc-900 flex justify-center">
+            <p className="text-slate-100 text-center my-auto">CN - Controle de Notas - 2023</p>
         </div>
     )
 }

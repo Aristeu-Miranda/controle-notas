@@ -5,7 +5,7 @@ import HeaderLink from "../HeaderLink/HeaderLink"
 import Hours from "../Hours/Hours";
 import { FiLogOut } from 'react-icons/fi'
 import Botao from "../Botao";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 
 function Header() {
@@ -24,13 +24,14 @@ function Header() {
         localStorage.clear()
     }
 
+    const location = useLocation();
+    const locatioNote = location.pathname === '/cn/new' ? 'bg-slate-100 text-black rounded-md' : ''
+    const locatioSupport = location.pathname === '/cn/suporte' ? 'bg-slate-100 text-black rounded-md' : ''
+
     return (
         <>
             <header className="w-full h-14 flex flex-col bg-zinc-900 border-b-2 border-slate-100">
-            <ul className="flex justify-around">
-                <li className="hidden sm:block">
-                    <Hours />
-                </li>
+            <ul className="flex justify-around font-bold text-slate-100">
                 <li>
                     <img 
                         src={Logo} 
@@ -38,8 +39,14 @@ function Header() {
                         className="h-14 w-14" 
                     />
                 </li>
+                <li className={`pt-4 px-4 hover:bg-slate-100 hover:text-black hover:rounded-md ${locatioNote}`}>
+                    <HeaderLink to={"new"} name={"Controle de Notas"}/>
+                </li>
+                <li className={`pt-4 px-4 hover:bg-slate-100 hover:text-black hover:rounded-md ${locatioSupport}`}>
+                    <HeaderLink to={"suporte"} name={"Suporte"} />
+                </li>
                 <li className="flex">
-                    <p className="pt-4 font-bold text-slate-100 mr-10">Olá, {user}!</p>
+                    <p className="pt-4 mr-10">Olá, {user}!</p>
                     <Botao className="text-white"
                         onClick={changePage}
                     >
@@ -48,12 +55,6 @@ function Header() {
                 </li>
             </ul>
             </header>
-            <nav>
-                <ul className="flex justify-evenly text-neutral-950 text-xs font-bold min-[354px]:text-sm min-[396px]:text-base">
-                    <HeaderLink to={"new"} name={"Controle de Notas"} />
-                    <HeaderLink to={"suporte"} name={"Suporte"} />
-                </ul>
-            </nav>
         </>
         
 

@@ -1,6 +1,7 @@
 import { InputProps } from "./Input.types"
+import { useForm } from "react-hook-form";
 
-function Input({ name, type, placeholder, className, onChange }: InputProps) {
+function Input({ name, type, placeholder, className, error, onChange}: InputProps) {
     return (
         <div>
             <input 
@@ -10,6 +11,7 @@ function Input({ name, type, placeholder, className, onChange }: InputProps) {
             className={className}
             onChange={onChange}
             />
+            {error && <span className="block text-xs text-red-700">{error.message}</span>}
         </div>
     )
 }

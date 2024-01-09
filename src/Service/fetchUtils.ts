@@ -13,6 +13,21 @@ export async function fetchClients(url: string) {
     }
 }
 
+export async function fetchCreate(url: string, data: any) {
+    const clientData = { ...data };
+    try {
+                const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(clientData),
+        });
+    } catch (error) {
+        console.error('Ocorreu um erro ao enviar os dados:', error);
+    }
+}
+
 
 export async function fetchRemove(url: string) {
     try {

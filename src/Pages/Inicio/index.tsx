@@ -64,7 +64,7 @@ function Inicio() {
         <header className="w-full text-center mb-5 md:py-20">
           <div className="text-xl md:text-7xl font-semibold mb-5">CN</div>
           <p className="text-xl md:text-5xl font-semibold">
-            Rápido, simples e fácil
+            Rápido, simples e fácil.
           </p>
         </header>
         <div className="max-w-5xl">
@@ -116,7 +116,7 @@ function Inicio() {
             </Botao>
           </form>
           <div className='mt-5'>
-                    <Link to='sing-up' className='text-xs text-gray-600 hover:underline opacity-80'>Registre-se</Link>
+                    <Link to='sing-up' className='text-xs text-gray-600 hover:underline opacity-80'>Novo Usuário</Link>
                 </div>
         </div>
       </div>

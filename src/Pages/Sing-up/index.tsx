@@ -15,13 +15,14 @@ const schema = object({
       .required("Campo obrigatório")
       .min(3, "Insira um nome válido")
       .max(35, "Excesso de caracteres"),
-    userpass: string().required("Campo obrigatório")
+    userpass: string().required("Campo obrigatório"),
+    confirmPassword: string().required("Campo obrigatório"),
   });
 
 function Singup() {
 
-    const NewUser = () => {
-        console.log('Dados enviados')
+    const NewUser = (data: any) => {
+        console.log('Dados enviados', data)
         reset()
     }
    
@@ -41,7 +42,7 @@ function Singup() {
   return (
     <div className="w-full h-screen flex flex-row justify-center items-center bg-img-singup bg-cover bg-center bg-no-repeat">
       <div
-        className="py-2 text-center w-1/3 h-2/4 backdrop-filter backdrop-blur-sm bg-slate-300 bg-opacity-70 rounded-lg overflow-hidden"
+        className="py-2 text-center w-1/3 backdrop-filter backdrop-blur-sm bg-slate-300 bg-opacity-70 rounded-lg overflow-hidden"
         data-aos="fade-top"
         data-aos-offset="200"
         data-aos-delay="150"
@@ -51,12 +52,13 @@ function Singup() {
           <p className="text-sm md:text-3xl font-bold mt-2">CADASTRO</p>
           <form onSubmit={handleSubmit(NewUser)}>
             <div className="my-4">
-              <label className="my-auto text-xs md:text-base" htmlFor="username">
+              <label className="my-auto text-xs md:text-base block" htmlFor="username">
                 Colaborador:
               </label>
-              <Input
+              <input
                 type="text"
                 className="p-1 w-2/4 bg-transparent border-b border-black text-center focus:outline-none"
+                autoComplete="off"
                 {...register("username")}
               />
               <span className="block text-xs text-red-700">
@@ -64,10 +66,10 @@ function Singup() {
               </span>
             </div>
             <div className="my-4">
-              <label className="my-auto text-xs md:text-base" htmlFor="">
+              <label className="my-auto text-xs md:text-base block" htmlFor="userpass">
                 Senha:
               </label>
-              <Input
+              <input
                 type="password"
                 className="p-1 w-2/4 bg-transparent border-b border-black text-center focus:outline-none"
                 {...register("userpass")}
@@ -77,13 +79,13 @@ function Singup() {
               </span>
             </div>
             <div className="my-4">
-              <label className="my-auto text-xs md:text-base" htmlFor="userpass">
+              <label className="my-auto text-xs md:text-base block" htmlFor="confirmPassword">
                 Confirme sua senha:
               </label>
-              <Input
+              <input
                 type="password"
                 className="p-1 w-2/4 bg-transparent border-b border-black text-center focus:outline-none"
-                {...register("userpass")}
+                {...register("confirmPassword")}
               />
               <span className="block text-xs text-red-700">
                 {errors?.userpass?.message}
