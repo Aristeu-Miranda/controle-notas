@@ -35,7 +35,7 @@ function CardNota({
         <Botao className="text-lime-600 transition hover:font-bold hover:text-lime-900 hover:underline" onClick={usingModal}>
           Mais informações
         </Botao>
-        <ModalRegister openmodal={modalOpen} closemodal={usingModal} closeBtn={false}>
+        <ModalRegister openmodal={modalOpen} closemodal={usingModal} closeBtn={true}>
             <DescriptionNote name={name} contract={contract} service={service} portion={portion} dateMaxSend={dateMaxSend} status={status}/>
         </ModalRegister>
         <Botao
