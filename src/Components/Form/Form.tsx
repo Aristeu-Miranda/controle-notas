@@ -30,7 +30,6 @@ function Form() {
     const {
         register,
         handleSubmit,
-        watch,
         reset,
         formState: { errors },
     } = useForm({
@@ -109,8 +108,7 @@ function Form() {
                 <div className="my-4 mx-auto w-1/2 flex flex-col">
                     <div className="flex">
                     <label className="top w-1/3 text-start" htmlFor='status'>Descrição</label>
-                    <textarea {...register("status")} className="p-4 rounded-lg w-2/3 h-48">
-                    </textarea>
+                    <textarea {...register("status")} className="p-4 rounded-lg w-2/3 h-48" />
                     </div>
                     <span className="my-1 text-red-700">{errors?.status?.message}</span>
                 </div>

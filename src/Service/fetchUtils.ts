@@ -28,16 +28,16 @@ export async function fetchCreate(url: string, data: any) {
     }
 }
 
-export async function fetchUpdate(url: string) {
+export async function fetchUpdate(url: string, data: any) {
+    const updateNote = data
     try {
         const resp = await fetch(url, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
-            }
+            },
+            body: JSON.stringify(updateNote)
         })
-        const data = await resp.json()
-        return data
     } catch (error) {
         throw new Error(`Fetch error: Network failed`)
     }
