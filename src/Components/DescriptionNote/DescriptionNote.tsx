@@ -15,20 +15,41 @@ function DescriptionNote({
   status,
 }: DescriptionNotesProps) {
   const [able, setAble] = useState(true);
-  const [editedName, setEditedName] = useState(name);
-  const [editedService, setEditedService] = useState(service);
-  const [editedContract, setEditedContract] = useState(contract);
-  const [editedPortion, setEditedPortion] = useState(portion);
-  const [editedDate, setEditedDate] = useState(dateMaxSend);
-  const [editedDescription, setEditedDescription] = useState(status)
+  const [formData, setFormData] = useState<DescriptionNotesProps>({
+    name,
+    contract,
+    service,
+    portion,
+    dateMaxSend,
+    status,
+  });
 
   const editInfosNote = () => {
     setAble(false);
   };
 
-  const updateNote = (data: any) => {
-    console.log(data)
-    console.log('click')
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleReset = () => {
+    setFormData({
+      name: "",
+      contract: "",
+      service: "",
+      portion: "",
+      dateMaxSend: "",
+      status: "",
+    });
+  };
+
+  const updateNote = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(formData);
   };
 
   return (
@@ -49,17 +70,16 @@ function DescriptionNote({
           </Botao>
         </div>
       </div>
-      <form onSubmit={updateNote} className="text-xl bg-white w-2/3 mx-auto rounded-lg p-5 shadow-2xl overflow-y-auto">
+      <form onSubmit={updateNote} onReset={handleReset} className="text-xl bg-white w-2/3 mx-auto rounded-lg p-5 shadow-2xl overflow-y-auto">
         <div className="my-2 border-b-2 border-black">
           <label htmlFor="name" className="font-medium block text-lg">
             Cliente:
           </label>
           <input
             type="text"
-            value={editedName}
-            onChange={(e) => {
-              setEditedName(e.target.value)
-            }}
+            name="name"
+            value={able ? name : formData.name}
+            onChange={handleChange}
             className={clsx(
               "text-center text-sm w-full p-2 rounded-md",
               able ? "bg-slate-200" : ""
@@ -68,15 +88,14 @@ function DescriptionNote({
           />
         </div>
         <div className="my-4 border-b-2 border-black">
-          <label htmlFor="name" className="font-medium block text-lg">
+          <label htmlFor="service" className="font-medium block text-lg">
             Serviço executado:
           </label>
           <input
             type="text"
-            value={editedService}
-            onChange={(e) => {
-              setEditedService(e.target.value)
-            }}
+            name="service"
+            value={able ? service : formData.service}
+            onChange={handleChange}
             className={clsx(
               "text-center text-sm w-full p-2 rounded-md",
               able ? "bg-slate-200" : ""
@@ -85,15 +104,14 @@ function DescriptionNote({
           />
         </div>
         <div className="my-4 border-b-2 border-black">
-          <label htmlFor="name" className="font-medium block text-lg">
+          <label htmlFor="contract" className="font-medium block text-lg">
             Nº do Contrato:
           </label>
           <input
             type="text"
-            value={editedContract}
-            onChange={(e) => {
-              setEditedContract(e.target.value)
-            }}
+            name="contract"
+            value={able ? contract : formData.contract}
+            onChange={handleChange}
             className={clsx(
               "text-center text-sm w-full p-2 rounded-md",
               able ? "bg-slate-200" : ""
@@ -102,15 +120,14 @@ function DescriptionNote({
           />
         </div>
         <div className="my-4 border-b-2 border-black">
-          <label htmlFor="name" className="font-medium block text-lg">
+          <label htmlFor="portion" className="font-medium block text-lg">
             Quantidade de parcelas:
           </label>
           <input
             type="text"
-            value={editedPortion}
-            onChange={(e) => {
-              setEditedPortion(e.target.value)
-            }}
+            name="portion"
+            value={able ? portion : formData.portion}
+            onChange={handleChange}
             className={clsx(
               "text-center text-sm w-full p-2 rounded-md",
               able ? "bg-slate-200" : ""
@@ -119,15 +136,14 @@ function DescriptionNote({
           />
         </div>
         <div className="my-4 border-b-2 border-black">
-          <label htmlFor="name" className="font-medium mb-3 block text-lg">
+          <label htmlFor="datemaxsend" className="font-medium mb-3 block text-lg">
             Dia para envio em cada mês:
           </label>
           <input
             type="text"
-            value={editedDate}
-            onChange={(e) => {
-              setEditedDate(e.target.value)
-            }}
+            name="dateMaxSend"
+            value={able ? dateMaxSend : formData.dateMaxSend}
+            onChange={handleChange}
             className={clsx(
               "text-center text-sm w-full p-2 rounded-md",
               able ? "bg-slate-200" : ""
@@ -136,19 +152,18 @@ function DescriptionNote({
           />
         </div>
         <div className="my-2">
-          <label htmlFor="name" className="font-medium mb-3 block text-lg">
+          <label htmlFor="status" className="font-medium mb-3 block text-lg">
             Descrição da Nota fiscal:
           </label>
           <textarea
-            onChange={(e) => {
-              setEditedDescription(e.target.value)
-            }}
+            name="status"
+            value={able ? status : formData.status}
+            onChange={handleChange}
             className={clsx(
               "text-start p-2 rounded-md text-sm w-full h-24",
               able ? "bg-slate-200" : ""
             )}
             disabled={able}
-            value={editedDescription}
           />
         </div>
         <Botao
