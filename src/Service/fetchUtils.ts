@@ -29,15 +29,20 @@ export async function fetchCreate(url: string, data: any) {
 }
 
 export async function fetchUpdate(url: string, data: any) {
-    const updateNote = data
     try {
-        const resp = await fetch(url, {
+        const resp = await fetch(new URL(url), {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(updateNote)
+            body: JSON.stringify({
+                ...data
+            })
         })
+        if (!resp.ok) {
+            throw new Error(`Erro na requisição: ${resp.status}`);
+          }
+        const responseData = await resp.json();
     } catch (error) {
         throw new Error(`Fetch error: Network failed`)
     }

@@ -4,7 +4,7 @@ export interface CardNotaProps {
     service: string;
     portion: string;
     status: string;
-    dateMaxSend: number | string;
+    dateMaxSend: number;
     removeNotas: any;
     id: number
 }

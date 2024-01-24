@@ -26,17 +26,17 @@ function CardNota({
 
   return (
     <div>
-      <div className="bg-slate-100 mb-1 py-2 rounded-lg text-center w-60 h-72 border border-black hover:drop-shadow-2xl hover:-translate-y-2 transition relative">
+      <div className="bg-slate-100 mb-1 py-2 rounded-lg text-center w-56 h-62 border border-black hover:drop-shadow-2xl hover:-translate-y-2 transition relative">
         <div className="h-2/4 my-4">
-          <FaBuilding className="mx-auto w-28 h-28 text-neutral-500" />
+          <FaBuilding className="mx-auto w-20 h-20 text-neutral-500" />
         </div>
-        <div className="mb-2 font-semibold">Cliente: {name}</div>
-        <div className="mb-3">Contrato n°: {contract}</div>
-        <Botao className="text-lime-600 transition hover:font-bold hover:text-lime-900 hover:underline" onClick={usingModal}>
+        <div className="mb-2 text-sm font-semibold">Cliente: {name}</div>
+        <div className="mb-3 text-sm">Contrato n°: {contract}</div>
+        <Botao className="text-lime-600 text-sm transition hover:font-bold hover:text-lime-900 hover:underline" onClick={usingModal}>
           Mais informações
         </Botao>
         <ModalRegister openmodal={modalOpen} closemodal={usingModal} closeBtn={true}>
-            <DescriptionNote name={name} contract={contract} service={service} portion={portion} dateMaxSend={dateMaxSend} status={status}/>
+            <DescriptionNote _id={id} name={name} contract={contract} service={service} portion={portion} date={dateMaxSend} status={status}/>
         </ModalRegister>
         <Botao
           className={

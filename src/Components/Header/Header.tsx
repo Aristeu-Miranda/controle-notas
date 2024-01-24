@@ -25,8 +25,8 @@ function Header() {
     }
 
     const location = useLocation();
-    const locatioNote = location.pathname === '/cn/new' ? 'bg-slate-100 text-black rounded-md' : ''
-    const locatioSupport = location.pathname === '/cn/suporte' ? 'bg-slate-100 text-black rounded-md' : ''
+    const locatioNote = location.pathname === '/cn/new' ? 'underline' : ''
+    const locatioSupport = location.pathname === '/cn/suporte' ? 'underline' : ''
 
     return (
         <>
@@ -39,10 +39,10 @@ function Header() {
                         className="h-14 w-14" 
                     />
                 </li>
-                <li className={`pt-4 px-4 hover:bg-slate-100 hover:text-black hover:rounded-md ${locatioNote}`}>
+                <li className={`pt-4 px-4 hover:underline underline-offset-4 ${locatioNote}`}>
                     <HeaderLink to={"new"} name={"Controle de Notas"}/>
                 </li>
-                <li className={`pt-4 px-4 hover:bg-slate-100 hover:text-black hover:rounded-md ${locatioSupport}`}>
+                <li className={`pt-4 px-4 hover:underline underline-offset-4 text-white ${locatioSupport}`}>
                     <HeaderLink to={"suporte"} name={"Suporte"} />
                 </li>
                 <li className="flex">

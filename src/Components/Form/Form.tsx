@@ -99,7 +99,7 @@ function Form() {
                     <input 
                         {...register("date")}
                         className='p-2 rounded-lg w-2/3' 
-                        type='text'
+                        type='number'
                         placeholder='Ex.: 25'
                     />
                     </div>

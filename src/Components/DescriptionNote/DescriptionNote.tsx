@@ -11,8 +11,9 @@ function DescriptionNote({
   contract,
   service,
   portion,
-  dateMaxSend,
+  date,
   status,
+  _id
 }: DescriptionNotesProps) {
   const [able, setAble] = useState(true);
   const [formData, setFormData] = useState<DescriptionNotesProps>({
@@ -20,36 +21,34 @@ function DescriptionNote({
     contract,
     service,
     portion,
-    dateMaxSend,
+    date,
     status,
+    _id
   });
 
   const editInfosNote = () => {
     setAble(false);
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
+  
+  const EditValuesInputs = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target; 
+    setFormData((beforeDatas) => ({
+      ...beforeDatas, 
+      [name]: value, 
     }));
   };
 
-  const handleReset = () => {
-    setFormData({
-      name: "",
-      contract: "",
-      service: "",
-      portion: "",
-      dateMaxSend: "",
-      status: "",
-    });
-  };
-
-  const updateNote = (e: React.FormEvent<HTMLFormElement>) => {
+  const updateNote = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(formData);
+    try {
+      const urlApiClientsUpdate = `https://controle-api-mhpv.onrender.com/notes/${_id}`
+      await fetchUpdate(urlApiClientsUpdate, formData)
+      window.location.reload()
+    } catch (error) {
+      console.error('Não foi possivel atualizar os dados:', error);
+    }
+    setAble(true)
   };
 
   return (
@@ -70,7 +69,7 @@ function DescriptionNote({
           </Botao>
         </div>
       </div>
-      <form onSubmit={updateNote} onReset={handleReset} className="text-xl bg-white w-2/3 mx-auto rounded-lg p-5 shadow-2xl overflow-y-auto">
+      <form onSubmit={updateNote} className="text-xl bg-white w-2/3 mx-auto rounded-lg p-5 shadow-2xl overflow-y-auto">
         <div className="my-2 border-b-2 border-black">
           <label htmlFor="name" className="font-medium block text-lg">
             Cliente:
@@ -79,7 +78,7 @@ function DescriptionNote({
             type="text"
             name="name"
             value={able ? name : formData.name}
-            onChange={handleChange}
+            onChange={EditValuesInputs}
             className={clsx(
               "text-center text-sm w-full p-2 rounded-md",
               able ? "bg-slate-200" : ""
@@ -95,7 +94,7 @@ function DescriptionNote({
             type="text"
             name="service"
             value={able ? service : formData.service}
-            onChange={handleChange}
+            onChange={EditValuesInputs}
             className={clsx(
               "text-center text-sm w-full p-2 rounded-md",
               able ? "bg-slate-200" : ""
@@ -111,7 +110,7 @@ function DescriptionNote({
             type="text"
             name="contract"
             value={able ? contract : formData.contract}
-            onChange={handleChange}
+            onChange={EditValuesInputs}
             className={clsx(
               "text-center text-sm w-full p-2 rounded-md",
               able ? "bg-slate-200" : ""
@@ -127,7 +126,7 @@ function DescriptionNote({
             type="text"
             name="portion"
             value={able ? portion : formData.portion}
-            onChange={handleChange}
+            onChange={EditValuesInputs}
             className={clsx(
               "text-center text-sm w-full p-2 rounded-md",
               able ? "bg-slate-200" : ""
@@ -136,14 +135,14 @@ function DescriptionNote({
           />
         </div>
         <div className="my-4 border-b-2 border-black">
-          <label htmlFor="datemaxsend" className="font-medium mb-3 block text-lg">
+          <label htmlFor="date" className="font-medium mb-3 block text-lg">
             Dia para envio em cada mês:
           </label>
           <input
-            type="text"
-            name="dateMaxSend"
-            value={able ? dateMaxSend : formData.dateMaxSend}
-            onChange={handleChange}
+            type="number"
+            name="date"
+            value={able ? date : formData.date}
+            onChange={EditValuesInputs}
             className={clsx(
               "text-center text-sm w-full p-2 rounded-md",
               able ? "bg-slate-200" : ""
@@ -158,7 +157,7 @@ function DescriptionNote({
           <textarea
             name="status"
             value={able ? status : formData.status}
-            onChange={handleChange}
+            onChange={EditValuesInputs}
             className={clsx(
               "text-start p-2 rounded-md text-sm w-full h-24",
               able ? "bg-slate-200" : ""
