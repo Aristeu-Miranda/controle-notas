@@ -7,30 +7,35 @@ import "aos/dist/aos.css";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { object, string } from "yup";
+import { singup } from "../../Service/UserService";
 
 AOS.init();
 
 const schema = object({
-    username: string()
+    name: string()
       .required("Campo obrigatório")
       .min(3, "Insira um nome válido")
       .max(35, "Excesso de caracteres"),
-    userpass: string().required("Campo obrigatório"),
+    email: string().required("Campo obrigatório"),
+    password: string().required("Campo obrigatório"),
     confirmPassword: string().required("Campo obrigatório"),
   });
 
 function Singup() {
 
-    const NewUser = (data: any) => {
-        console.log('Dados enviados', data)
-        reset()
+    const NewUser = async (data: any) => {
+      try {
+        const response = await singup(data)
+        
+        console.log(response)  
+      } catch (error) {
+        console.log('error', error)
+      }     
     }
    
     const {
         register,
         handleSubmit,
-        // eslint-disable-next-line
-        watch,
         reset,
         formState: { errors },
       } = useForm({
@@ -59,10 +64,24 @@ function Singup() {
                 type="text"
                 className="p-1 w-2/4 bg-transparent border-b border-black text-center focus:outline-none"
                 autoComplete="off"
-                {...register("username")}
+                {...register("name")}
               />
               <span className="block text-xs text-red-700">
-                {errors?.username?.message}
+                {errors?.name?.message}
+              </span>
+            </div>
+            <div className="my-4">
+            <label className="my-auto text-xs md:text-base block" htmlFor="username">
+                E-mail:
+              </label>
+            <input
+                type="email"
+                className="p-1 w-2/4 bg-transparent border-b border-black text-center focus:outline-none"
+                autoComplete="off"
+                {...register("email")}
+              />
+              <span className="block text-xs text-red-700">
+                {errors?.email?.message}
               </span>
             </div>
             <div className="my-4">
@@ -72,10 +91,10 @@ function Singup() {
               <input
                 type="password"
                 className="p-1 w-2/4 bg-transparent border-b border-black text-center focus:outline-none"
-                {...register("userpass")}
+                {...register("password")}
               />
               <span className="block text-xs text-red-700">
-                {errors?.userpass?.message}
+                {errors?.password?.message}
               </span>
             </div>
             <div className="my-4">
@@ -88,7 +107,7 @@ function Singup() {
                 {...register("confirmPassword")}
               />
               <span className="block text-xs text-red-700">
-                {errors?.userpass?.message}
+                {errors?.password?.message}
               </span>
             </div>
             <Botao className="text-white p-2 mt-50 bg-green-500 rounded-lg transition hover:bg-green-700 duration-300">
