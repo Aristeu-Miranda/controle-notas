@@ -1,51 +1,38 @@
 import { Link, useNavigate } from "react-router-dom";
 import Botao from "../../Components/Botao/Botao";
-import { useContext, useEffect } from "react";
-import { UserContext } from "../../Contexts/User/UserContext";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { object, string } from "yup";
-import ImgBg from "../../Images/capa-inicio.png";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import Cookies from "js-cookie";
+import { singin } from "../../Service/UserService";
 
 AOS.init();
 
 const schema = object({
-  username: string()
+  name: string()
     .required("Campo obrigatório")
     .min(3, "Insira um nome válido")
     .max(35, "Excesso de caracteres"),
-  userpass: string(),
+  password: string(),
 });
 
 function Inicio() {
   const navigate = useNavigate();
-  const onSubmit = () => {
-    navigate("/cn/new");
-    reset();
+  const Login = async (data: any) => {
+    try {
+      const response = await singin(data)
+      Cookies.set("token", response.data.token, { expires: 1 })
+      navigate('/cn/new')
+    } catch (error) {
+      console.log('error', error)
+    }   
   };
-  const { user, setUser } = useContext(UserContext);
-  const changeName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUser(e.target.value);
-  };
-
-  useEffect(() => {
-    const valueStorage = localStorage.getItem("userName");
-    if (valueStorage) {
-      setUser(valueStorage);
-    }
-  }, [setUser]);
-
-  useEffect(() => {
-    localStorage.setItem("userName", user);
-  }, [user]);
 
   const {
     register,
     handleSubmit,
-    // eslint-disable-next-line
-    watch,
     reset,
     formState: { errors },
   } = useForm({
@@ -81,29 +68,28 @@ function Inicio() {
         data-aos-duration="2000"
       >
         <div className="max-w-2xl text-center py-10">
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form onSubmit={handleSubmit(Login)}>
             <div className="my-4 px-4 md:px-11 text-start">
-              <label htmlFor="username">Colaborador</label>
+              <label htmlFor="name">Colaborador</label>
               <input
                 className="w-full py-1 rounded-md px-2"
                 placeholder={"Digite seu nome"}
-                {...register("username")}
-                onChange={changeName}
+                {...register("name")}
               />
               <span className="block my-1 text-red-700">
-                {errors?.username?.message}
+                {errors?.name?.message}
               </span>
             </div>
             <div className="my-4 px-4 md:px-11 text-start">
-            <label htmlFor="userpass">Senha</label>
+            <label htmlFor="password">Senha</label>
               <input
                 type="password"
                 className="w-full py-1 rounded-md px-2"
                 placeholder={"Digite sua senha"}
-                {...register("userpass")}
+                {...register("password")}
               />
               <span className="block my-1 text-red-700">
-                {errors?.userpass?.message}
+                {errors?.password?.message}
               </span>
             </div>
             <Botao

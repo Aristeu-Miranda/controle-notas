@@ -1,29 +1,20 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import Logo from '../../Assets/logotipo.png'
-import { UserContext } from "../../Contexts/User/UserContext";
 import HeaderLink from "../HeaderLink/HeaderLink"
 import Hours from "../Hours/Hours";
 import { FiLogOut } from 'react-icons/fi'
 import Botao from "../Botao";
 import { useLocation, useNavigate } from "react-router-dom";
+import { UserContext } from "../../Contexts/User/UserContext";
+
 
 
 function Header() {
-    const { user, setUser } = useContext(UserContext);
-
-    useEffect(() => {
-        const valueStorage = localStorage.getItem('userName');
-        if (valueStorage) {
-            setUser(valueStorage);
-        }
-    }, [setUser]);
-
     const navigate = useNavigate()
     const changePage = () => {
         navigate('/')
-        localStorage.clear()
     }
-
+    const { user } = useContext(UserContext)
     const location = useLocation();
     const locatioNote = location.pathname === '/cn/new' ? 'underline' : ''
     const locatioSupport = location.pathname === '/cn/suporte' ? 'underline' : ''
@@ -46,7 +37,7 @@ function Header() {
                     <HeaderLink to={"suporte"} name={"Suporte"} />
                 </li>
                 <li className="flex">
-                    <p className="pt-4 mr-10">Olá, {user}!</p>
+                    <p className="pt-4 mr-10">Olá, {user?.name}</p>
                     <Botao className="text-white"
                         onClick={changePage}
                     >

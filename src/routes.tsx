@@ -3,8 +3,8 @@ import Inicio from './Pages/Inicio';
 import PageBase from './Pages/PageBase';
 import NewNota from './Pages/NewNota';
 import Contato from './Pages/Contato';
-import UserProvider from './Contexts/User/UserContext';
 import Singup from './Pages/Sing-up';
+import { UserProvider } from './Contexts/User/UserContext';
 
 
 

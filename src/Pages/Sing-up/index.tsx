@@ -1,6 +1,5 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Botao from "../../Components/Botao/Botao";
-import Input from "../../Components/Input/Input";
 import ImgBgSingUp from "../../Images/bg-sign-up.jpg";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -8,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { object, string } from "yup";
 import { singup } from "../../Service/UserService";
+import Cookies from "js-cookie";
 
 AOS.init();
 
@@ -23,11 +23,12 @@ const schema = object({
 
 function Singup() {
 
+    const navigate = useNavigate();
     const NewUser = async (data: any) => {
       try {
         const response = await singup(data)
-        
-        console.log(response)  
+        Cookies.set("token", response.data.token, { expires: 1 })
+        navigate('/cn/new')
       } catch (error) {
         console.log('error', error)
       }     

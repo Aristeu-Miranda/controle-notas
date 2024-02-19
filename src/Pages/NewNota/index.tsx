@@ -9,6 +9,7 @@ import Loader from "../../Components/Loader/Loarder";
 import { fetchClients, fetchRemove } from "../../Service/fetchUtils";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Cookies from "js-cookie";
 
 function NewNota() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -21,30 +22,24 @@ function NewNota() {
     } else setModalOpen(true);
   }
 
-  useEffect(() => {
-    const urlApiClients = "https://controle-api-mhpv.onrender.com/notes";
-    fetchClients(urlApiClients).then((data) => {
-      setDados(data);
-      setLoading(false);
-    });
-  }, []);
+  console.log(Cookies.get("token"))
 
   const removeNotas = async (id: any) => {
-    const urlApiClientsDelete = `https://controle-api-mhpv.onrender.com/notes/${id}`
-      await fetchRemove(urlApiClientsDelete)
-      .then(() => {
-        setDados(dados.filter((dado) => dado._id !== id));
-      });
-      toast.success("Registro removido!", {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
+    // // const urlApiClientsDelete = `https://controle-api-mhpv.onrender.com/notes/${id}`
+    // //   await fetchRemove(urlApiClientsDelete)
+    // //   .then(() => {
+    // //     setDados(dados.filter((dado) => dado._id !== id));
+    // //   });
+    //   toast.success("Registro removido!", {
+    //     position: "top-right",
+    //     autoClose: 3000,
+    //     hideProgressBar: false,
+    //     closeOnClick: true,
+    //     pauseOnHover: true,
+    //     draggable: true,
+    //     progress: undefined,
+    //     theme: "dark",
+    //   });
     
   };
 
